@@ -1,6 +1,6 @@
 import puppeteer, { Browser, Page } from "puppeteer";
 
-export class PuppeteerHandler {
+class PuppeteerHandler {
   private browser?: Browser;
   constructor() {}
 
@@ -43,3 +43,5 @@ export class PuppeteerHandler {
     await this.browser?.close();
   };
 }
+
+export const puppeteerHandler = new PuppeteerHandler()
