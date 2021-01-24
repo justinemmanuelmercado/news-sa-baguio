@@ -1,7 +1,8 @@
 import puppeteer, { Browser, Page } from "puppeteer";
 
-class PuppeteerHandler {
+export class PuppeteerHandler {
   private browser?: Browser;
+  private page?: Page;
   constructor() {}
 
   init = async () => {
@@ -10,7 +11,7 @@ class PuppeteerHandler {
       if (!this.browser) {
         this.browser = await puppeteer.launch({
           headless: true,
-          args: ["--disable-setuid-sandbox"],
+          args: ["--disable-setuid-sandbox", "--single-process"],
           ignoreHTTPSErrors: true,
         });
       }
@@ -20,28 +21,30 @@ class PuppeteerHandler {
     }
   };
 
-  openPage = async (url?: string): Promise<Page> => {
+  handlePage = async <T>(
+    pageHandler: (page: Page) => Promise<T>
+  ): Promise<T> => {
     if (!this.browser) {
       await this.init();
     }
-    const page = await this.browser?.newPage();
-    if (page) {
-      if (url) {
-        console.log(`Opening new page ${url}`);
-        page?.goto(url);
-      } else {
-        console.log(`Opening new page`);
-      }
-      return page;
+    if (this.page) {
+      return await pageHandler(this.page);
     } else {
-      throw new Error("Could not open page");
+      this.page = await this.browser?.newPage();
+      if (this.page) {
+        return await pageHandler(this.page!);
+      } else {
+        throw new Error("Cannot open page");
+      }
     }
   };
 
-  close = async () => {
-    console.log("Closing browser");
+  closeBrowser = async () => {
+    console.log("Closing page...");
+    console.log("Closing browser...");
+    await this.page?.close();
     await this.browser?.close();
   };
 }
 
-export const puppeteerHandler = new PuppeteerHandler()
+export const puppeteerHandler = new PuppeteerHandler();
