@@ -4,8 +4,10 @@ import { extract } from "article-parser";
 import { Article } from "../article";
 import { Page } from "puppeteer";
 
-export class Inquirer implements Source {
-  constructor(public puppeteerHandler: PuppeteerHandler) {}
+export class Inquirer extends Source implements Source {
+  constructor(public puppeteerHandler: PuppeteerHandler) {
+    super()
+  }
 
   name = "Inquirer";
   id = "e0e865b6-b2e9-4149-9e0b-ed4fa30624f1";
@@ -34,7 +36,7 @@ export class Inquirer implements Source {
 
   scrape = async () => {
     try {
-      const articles = await this.getArticlesUrl();
+      const articles = await this.getUrlsCleaned();
       const articlesData: Article[] = [];
       for (const articleUrl of articles) {
         const articleData = await extract(articleUrl);
@@ -43,7 +45,6 @@ export class Inquirer implements Source {
           newsSource: this.id,
         });
       }
-
       return articlesData;
     } catch (e) {
       console.error("error scraping", e);

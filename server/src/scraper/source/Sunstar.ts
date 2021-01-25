@@ -4,27 +4,39 @@ import { extract } from "article-parser";
 import { Article } from "../article";
 import { Page } from "puppeteer";
 
-export class Herald extends Source implements Source{
+export class Sunstar extends Source implements Source {
   constructor(public puppeteerHandler: PuppeteerHandler) {
     super()
   }
 
-  name = "Herald Express";
-  id = "ec293a00-59ce-4d55-92ac-89379d3a41a0";
-  homepage = "https://www.baguioheraldexpressonline.com/category/city/";
+  name = "Sunstar";
+  id = "b19eac3c-9fe1-4abd-b146-75fbaa431c12";
+  homepage = "https://www.sunstar.com.ph/BAGUIO";
 
   getArticlesUrl = async () => {
     const handler = async (page: Page): Promise<string[]> => {
       try {
         page.goto(this.homepage, { waitUntil: "load", timeout: 0 });
-        await page.waitForSelector("#main");
+        await page.waitForSelector(".container");
+
         const links: string[] = await page.evaluate(() => {
-          return Promise.resolve(
-            Array.from(
-              document.querySelectorAll("header.entry-header > h2 > a")
-            ).map((link: Element) => (link as HTMLAnchorElement).href)
-          );
+          const carousellLinks = Array.from(
+            document.querySelectorAll(
+              ".owl-thumbs > .owl-thumb-item > .img-thumb > a"
+            )
+          ).map((link: Element) => (link as HTMLAnchorElement).href);
+
+          const topLinks = Array.from(
+            document.querySelectorAll(
+              ".topStoriesArticles > .content-row > .col-left > a.ratio"
+            )
+          ).map((link: Element) => (link as HTMLAnchorElement).href);
+
+          Array.prototype.push.apply(carousellLinks, topLinks);
+
+          return carousellLinks;
         });
+
         return links;
       } catch (e) {
         console.error(e);
@@ -40,12 +52,13 @@ export class Herald extends Source implements Source{
       const articlesData: Article[] = [];
       for (const articleUrl of articles) {
         const articleData = await extract(articleUrl);
-        articlesData.push({
-          ...articleData,
-          newsSource: this.id,
-        });
+        if(articleData) {
+          articlesData.push({
+            ...articleData,
+            newsSource: this.id,
+          });
+        }
       }
-
       return articlesData;
     } catch (e) {
       console.error("error scraping", e);
