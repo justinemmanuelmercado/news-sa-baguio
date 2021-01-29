@@ -6,7 +6,7 @@ import { Page } from "puppeteer";
 
 export class Sunstar extends Source implements Source {
   constructor(public puppeteerHandler: PuppeteerHandler) {
-    super()
+    super();
   }
 
   name = "Sunstar";
@@ -15,54 +15,29 @@ export class Sunstar extends Source implements Source {
 
   getArticlesUrl = async () => {
     const handler = async (page: Page): Promise<string[]> => {
-      try {
-        page.goto(this.homepage, { waitUntil: "load", timeout: 0 });
-        await page.waitForSelector(".container");
+      page.goto(this.homepage, { waitUntil: "load", timeout: 0 });
+      await page.waitForSelector(".container");
 
-        const links: string[] = await page.evaluate(() => {
-          const carousellLinks = Array.from(
-            document.querySelectorAll(
-              ".owl-thumbs > .owl-thumb-item > .img-thumb > a"
-            )
-          ).map((link: Element) => (link as HTMLAnchorElement).href);
+      const links: string[] = await page.evaluate(() => {
+        const carousellLinks = Array.from(
+          document.querySelectorAll(
+            ".owl-thumbs > .owl-thumb-item > .img-thumb > a"
+          )
+        ).map((link: Element) => (link as HTMLAnchorElement).href);
 
-          const topLinks = Array.from(
-            document.querySelectorAll(
-              ".topStoriesArticles > .content-row > .col-left > a.ratio"
-            )
-          ).map((link: Element) => (link as HTMLAnchorElement).href);
+        const topLinks = Array.from(
+          document.querySelectorAll(
+            ".topStoriesArticles > .content-row > .col-left > a.ratio"
+          )
+        ).map((link: Element) => (link as HTMLAnchorElement).href);
 
-          Array.prototype.push.apply(carousellLinks, topLinks);
+        Array.prototype.push.apply(carousellLinks, topLinks);
 
-          return carousellLinks;
-        });
+        return carousellLinks;
+      });
 
-        return links;
-      } catch (e) {
-        console.error(e);
-        throw new Error("Failed getting article URLs");
-      }
+      return links;
     };
     return await this.puppeteerHandler.handlePage(handler);
-  };
-
-  scrape = async () => {
-    try {
-      const articles = await this.getUrlsCleaned();
-      const articlesData: Article[] = [];
-      for (const articleUrl of articles) {
-        const articleData = await extract(articleUrl);
-        if(articleData) {
-          articlesData.push({
-            ...articleData,
-            newsSource: this.id,
-          });
-        }
-      }
-      return articlesData;
-    } catch (e) {
-      console.error("error scraping", e);
-      return [];
-    }
   };
 }

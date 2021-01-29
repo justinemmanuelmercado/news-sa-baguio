@@ -5,22 +5,31 @@ import { puppeteerHandler } from "./puppeteer";
 import { Sunstar } from "./source/Sunstar";
 import { Abscbn } from "./source/Abscbn";
 import { Pia } from "./source/Pia";
+import { Source } from "./source/Source";
 
 (async () => {
+  await puppeteerHandler.init();
   const inq = new Inquirer(puppeteerHandler);
   const he = new Herald(puppeteerHandler);
   const sunstar = new Sunstar(puppeteerHandler);
   const abs = new Abscbn(puppeteerHandler);
   const pia = new Pia(puppeteerHandler);
 
-  const scraped = [
-    ...(await inq.scrape()),
-    ...(await he.scrape()),
-    ...(await sunstar.scrape()),
-    ...(await abs.scrape()),
-    ...(await pia.scrape()),
-  ];
+  const toScrape: Source[] = [inq, he, sunstar, abs, pia];
+
   const supabase = new Supabase();
-  await supabase.insertArticles(scraped);
+
+  for (const scrapee of toScrape) {
+    console.log(`Processing ${scrapee.name}`);
+    try {
+      const scraped = await scrapee.getArticleData();
+      await supabase.insertArticles(scraped);
+    } catch (e) {
+      console.error(`Failed to scrape ${scrapee.name}`);
+      console.error(e);
+    }
+    console.log(`Ending ${scrapee.name}`);
+  }
+  
   await puppeteerHandler.closeBrowser();
 })();

@@ -6,18 +6,19 @@ export class PuppeteerHandler {
   constructor() {}
 
   init = async () => {
-    try {
+    if (!this.browser) {
       console.log("Opening the browser...");
-      if (!this.browser) {
-        this.browser = await puppeteer.launch({
-          headless: true,
-          args: ["--disable-setuid-sandbox", "--single-process"],
-          ignoreHTTPSErrors: true,
-        });
-      }
-    } catch (e) {
-      console.error(e);
-      throw new Error("Could not create a browser instance");
+
+      this.browser = await puppeteer.launch({
+        headless: true,
+        args: ["--disable-setuid-sandbox", "--single-process"],
+        ignoreHTTPSErrors: true,
+      });
+      process.on("unhandledRejection", (reason, p) => {
+        console.error("Unhandled Rejection at: Promise", p, "reason:", reason);
+        this.browser?.close();
+      });
+      this.page = await this.browser.newPage();
     }
   };
 
@@ -30,12 +31,7 @@ export class PuppeteerHandler {
     if (this.page) {
       return await pageHandler(this.page);
     } else {
-      this.page = await this.browser?.newPage();
-      if (this.page) {
-        return await pageHandler(this.page!);
-      } else {
-        throw new Error("Cannot open page");
-      }
+      throw new Error("Page did not open correctly");
     }
   };
 

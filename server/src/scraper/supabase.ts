@@ -22,20 +22,21 @@ export class Supabase {
       console.log("Supabase client not configured properly... Doing nothing");
       return;
     }
-    try {
-      const { data, error } = await this.client
-        .from("ArticleData")
-        .insert(articles, { onConflict: "url", upsert: true });
+    const { data, error } = await this.client
+      .from("ArticleData")
+      .insert(articles, { onConflict: "url", upsert: true });
 
-      if (error) {
-        throw new Error(error.message);
-      } else {
-        console.log("Successful insert");
-        console.log(`insert count ${data?.length || 0}`);
-      }
-    } catch (e) {
-      console.error("Failed on insert");
-      console.error(e);
+    if (error) {
+      console.log(
+        "FAILED TO INSERT THE FOLLOWING BECAUSE OF THE FOLLOWING: ",
+        error.details,
+        error.hint,
+        error.code
+      );
+      throw new Error(error.message);
+    } else {
+      console.log("Successful insert");
+      console.log(`insert count ${data?.length || 0}`);
     }
   };
 }

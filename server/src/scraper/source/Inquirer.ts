@@ -6,7 +6,7 @@ import { Page } from "puppeteer";
 
 export class Inquirer extends Source implements Source {
   constructor(public puppeteerHandler: PuppeteerHandler) {
-    super()
+    super();
   }
 
   name = "Inquirer";
@@ -15,40 +15,17 @@ export class Inquirer extends Source implements Source {
 
   getArticlesUrl = async () => {
     const handler = async (page: Page): Promise<string[]> => {
-      try {
-        page.goto(this.homepage, { waitUntil: "load", timeout: 0 });
-        await page.waitForSelector("#inq-channel-left");
-        const links: string[] = await page.evaluate(() => {
-          return Promise.resolve(
-            Array.from(document.querySelectorAll("#ch-ls-head > h2 > a")).map(
-              (link: Element) => (link as HTMLAnchorElement).href
-            )
-          );
-        });
-        return links;
-      } catch (e) {
-        console.error(e);
-        throw new Error("Failed getting article URLs");
-      }
+      page.goto(this.homepage, { waitUntil: "load", timeout: 0 });
+      await page.waitForSelector("#inq-channel-left");
+      const links: string[] = await page.evaluate(() => {
+        return Promise.resolve(
+          Array.from(document.querySelectorAll("#ch-ls-head > h2 > a")).map(
+            (link: Element) => (link as HTMLAnchorElement).href
+          )
+        );
+      });
+      return links;
     };
     return await this.puppeteerHandler.handlePage(handler);
-  };
-
-  scrape = async () => {
-    try {
-      const articles = await this.getUrlsCleaned();
-      const articlesData: Article[] = [];
-      for (const articleUrl of articles) {
-        const articleData = await extract(articleUrl);
-        articlesData.push({
-          ...articleData,
-          newsSource: this.id,
-        });
-      }
-      return articlesData;
-    } catch (e) {
-      console.error("error scraping", e);
-      return [];
-    }
   };
 }
