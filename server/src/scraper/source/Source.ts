@@ -1,4 +1,4 @@
-import { extract } from 'article-parser';
+import { extract } from "article-parser";
 import { Article } from "../article";
 import { PuppeteerHandler } from "../puppeteer";
 
@@ -28,25 +28,25 @@ export abstract class Source {
   getData = async (articleUrl: string) => {
     try {
       const articleData = await extract(articleUrl);
-      return articleData
+      return articleData;
     } catch (e) {
       console.error(`Failed to scrape: ${articleUrl}: `);
       console.error(e);
     }
-  }
-  
+  };
+
   protected scrape = async () => {
     const articles = await this.getUrlsCleaned();
     const articlesData: Article[] = [];
     for (const articleUrl of articles) {
       const articleData = await this.getData(articleUrl);
-      if(articleData){
+      if (articleData) {
         articlesData.push({
           ...articleData,
           newsSource: this.id,
         });
       } else {
-        console.log(`getData failed for ${articleUrl}`)
+        console.log(`getData failed for ${articleUrl}`);
       }
     }
     return articlesData;
