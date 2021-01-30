@@ -6,11 +6,11 @@ module.exports = {
             transparent: 'transparent',
             current: 'currentColor',
             blue: {
-                500: '#5D848E',
-                400: '#68939E',
-                300: '#73A3B0',
-                200: '#80B5C3',
-                100: '#8EC9D9',
+                500: '#4545B8',
+                400: '#6868F7',
+                300: '#9393F0',
+                200: '#B5B5FF',
+                100: '#D6D9FF',
             },
             green: {
                 500: '#0BB68B',
