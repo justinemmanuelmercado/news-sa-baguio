@@ -2,6 +2,11 @@
 /* eslint-env node */
 module.exports = {
     theme: {
+        extend: {
+            gridTemplateColumns: {
+                main: '20rem minmax(20rem, 1fr) 1fr',
+            },
+        },
         colors: {
             transparent: 'transparent',
             current: 'currentColor',

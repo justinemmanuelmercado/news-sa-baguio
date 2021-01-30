@@ -21,20 +21,27 @@ function MenuLink({
     )
 }
 
+function BottomLink({ name }: { name: string }) {
+    return (
+        <span className={`flex flex-row space-x-2 cursor-pointer`}>
+            <span>{name}</span>
+        </span>
+    )
+}
+
 function Menu(): JSX.Element {
     return (
-        <div className="h-full bg-green-500 text-gray-100 space-y-8">
+        <div className="h-full bg-green-500 text-gray-100 space-y-8 flex flex-col">
             <div className="bg-green-400 space-y-8 py-8 pl-6">
                 <div className="text-6xl font-black">
                     <h1>Bageeow</h1>
                 </div>
-                <div className="space-x-4">
-                    <button className="btn bg-blue-300 hover:bg-blue-200">Sign In</button>
-                    <span>or</span>
-                    <button className="btn bg-green-500 hover:bg-green-300">Sign Up</button>
+                <div className="space-x-1">
+                    <button className="btn bg-blue-200 hover:bg-blue-100">Sign In</button>
+                    <button className="btn bg-blue-400 hover:bg-blue-300">Sign Up</button>
                 </div>
             </div>
-            <div className="pl-6 text-gray-100">
+            <div className="pl-6 text-gray-100 flex flex-col justify-between flex-grow">
                 <div className="flex flex-col text-xl space-y-4">
                     <MenuLink Icon={Home} name="Home" isActive={true} />
                     <MenuLink Icon={Filter} name="Filter" isActive={false} />
@@ -43,7 +50,11 @@ function Menu(): JSX.Element {
                     <MenuLink Icon={Settings} name="Options" isActive={false} />
                 </div>
             </div>
-            <div className="pl-6 text-gray-100"></div>
+            <div className="text-gray-100 pl-6 pb-6">
+                <BottomLink name="Contact" />
+                <BottomLink name="About" />
+                <BottomLink name="Terms & Conditions" />
+            </div>
         </div>
     )
 }
