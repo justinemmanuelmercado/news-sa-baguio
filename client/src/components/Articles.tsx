@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from 'react'
-import { sb } from '../api'
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState, fetchArticles } from '../store'
 
 function Articles(): JSX.Element {
-    const [articles, setArticles] = useState<unknown>()
+    const dispatch = useDispatch()
+    const { articles } = useSelector((state: RootState) => state.articles)
     useEffect(() => {
-        const getArticles = async () => {
-            const result = await sb.getArticles()
-            console.log(result)
-            if (result) {
-                setArticles(result)
-            }
+        const fetchData = async () => {
+            await dispatch(fetchArticles())
         }
-
-        getArticles()
+        fetchData()
     }, [])
-    return <div>Articles</div>
+    console.log(articles)
+
+    return <div>{articles.length}</div>
 }
 
 export default Articles
