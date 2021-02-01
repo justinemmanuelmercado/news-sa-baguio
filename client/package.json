@@ -11,6 +11,7 @@
     "@snowpack/plugin-typescript": "^1.2.1",
     "@types/node": "^14.14.22",
     "@types/react": "^17.0.0",
+    "@types/react-redux": "^7.1.16",
     "@types/snowpack-env": "^2.3.3",
     "@typescript-eslint/eslint-plugin": "^4.14.1",
     "@typescript-eslint/parser": "^4.14.1",
