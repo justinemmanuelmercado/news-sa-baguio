@@ -11,11 +11,7 @@ function MenuLink({
     isActive: boolean
 }): JSX.Element {
     return (
-        <span
-            className={`${
-                isActive ? 'text-gray-100 font-black' : ''
-            } flex flex-row space-x-2 cursor-pointer`}
-        >
+        <span className={`${isActive ? 'font-black' : ''} flex flex-row space-x-2 cursor-pointer`}>
             <Icon /> <span>{name}</span>
         </span>
     )
@@ -31,17 +27,17 @@ function BottomLink({ name }: { name: string }) {
 
 function Menu(): JSX.Element {
     return (
-        <div className="h-full bg-green-500 text-gray-100 space-y-8 flex flex-col">
-            <div className="bg-green-400 space-y-8 py-8 pl-6">
+        <div className="h-full bg-green-500 text-gray-500 space-y-8 flex flex-col">
+            <div className="bg-green-300 space-y-8 py-8 pl-6">
                 <div className="text-6xl font-black">
-                    <h1>Bageeow</h1>
+                    <h1>Logo</h1>
                 </div>
                 <div className="space-x-1">
                     <button className="btn bg-blue-200 hover:bg-blue-100">Sign In</button>
-                    <button className="btn bg-blue-400 hover:bg-blue-300">Sign Up</button>
+                    <button className="btn bg-blue-400 hover:bg-blue-300">Register</button>
                 </div>
             </div>
-            <div className="pl-6 text-gray-100 flex flex-col justify-between flex-grow">
+            <div className="pl-6 text-gray-200 flex flex-col justify-between flex-grow">
                 <div className="flex flex-col text-xl space-y-4">
                     <MenuLink Icon={Home} name="Home" isActive={true} />
                     <MenuLink Icon={Filter} name="Filter" isActive={false} />
@@ -50,7 +46,7 @@ function Menu(): JSX.Element {
                     <MenuLink Icon={Settings} name="Options" isActive={false} />
                 </div>
             </div>
-            <div className="text-gray-100 pl-6 pb-6">
+            <div className="text-gray-200 pl-6 pb-6">
                 <BottomLink name="Contact" />
                 <BottomLink name="About" />
                 <BottomLink name="Terms & Conditions" />

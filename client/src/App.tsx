@@ -11,7 +11,7 @@ export const App = (): JSX.Element => {
             <section>
                 <Articles />
             </section>
-            <section>Content</section>
+            <section className="bg-gray-500">Content</section>
         </div>
     )
 }
