@@ -2,7 +2,7 @@ import puppeteer, { Browser, Page } from 'puppeteer'
 
 export class PuppeteerHandler {
     private browser?: Browser
-    private page?: Page
+    private pages: Record<string, Page> = {}
     init = async (): Promise<void> => {
         if (!this.browser) {
             console.log('Opening the browser...')
@@ -12,29 +12,44 @@ export class PuppeteerHandler {
                 args: ['--disable-setuid-sandbox', '--single-process'],
                 ignoreHTTPSErrors: true,
             })
-            process.on('unhandledRejection', (reason, p) => {
-                console.error('Unhandled Rejection at: Promise', p, 'reason:', reason)
-                this.browser?.close()
+            process.on('unhandledRejection', () => {
+                console.error('Unhandled Rejection at: Promise')
             })
-            this.page = await this.browser.newPage()
         }
     }
 
-    handlePage = async <T>(pageHandler: (page: Page) => Promise<T>): Promise<T> => {
+    handlePage = async <T>(pageHandler: (page: Page) => Promise<T>, url: string): Promise<T> => {
         if (!this.browser) {
             await this.init()
         }
-        if (this.page) {
-            return await pageHandler(this.page)
+
+        if (this.pages[url]) {
+            this.pages[url].goto(url, { waitUntil: 'load', timeout: 0 })
+
+            return await pageHandler(this.pages[url])
+        } else if (this.browser && !this.pages[url]) {
+            this.pages[url] = await this.browser?.newPage()
+            this.pages[url].goto(url, { waitUntil: 'load', timeout: 0 })
+
+            return await pageHandler(this.pages[url])
         } else {
-            throw new Error('Page did not open correctly')
+            throw new Error('Page and browser did not open correctly')
         }
     }
 
     closeBrowser = async (): Promise<void> => {
-        console.log('Closing page...')
+        for (const [index, page] of Object.entries(this.pages)) {
+            console.log(`Closing page for ${index}`)
+            await page.close()
+            delete this.pages[index]
+        }
+
+        if (Object.keys(this.pages).length !== 0) {
+            console.log('Pages did not close for some reason :/ ')
+            console.log(Object.keys(this.pages).map((key) => `${key} is not closed`))
+        }
+
         console.log('Closing browser...')
-        await this.page?.close()
         await this.browser?.close()
     }
 }

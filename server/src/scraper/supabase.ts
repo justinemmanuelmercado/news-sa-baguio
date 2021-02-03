@@ -15,10 +15,10 @@ export class Supabase {
         }
     }
 
-    insertArticles = async (articles: Article[]): Promise<void> => {
+    insertArticles = async (articles: Article[]): Promise<unknown[] | null | void> => {
         if (!this.client) {
             console.log('Supabase client not configured properly... Doing nothing')
-            return
+            return []
         }
         const { data, error } = await this.client
             .from('ArticleData')
@@ -32,9 +32,8 @@ export class Supabase {
                 error.code,
             )
             throw new Error(error.message)
-        } else {
-            console.log('Successful insert')
-            console.log(`insert count ${data?.length || 0}`)
         }
+
+        return data
     }
 }

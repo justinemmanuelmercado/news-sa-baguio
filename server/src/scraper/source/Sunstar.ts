@@ -1,19 +1,13 @@
-import { PuppeteerHandler } from '../puppeteer'
 import { Source } from './Source'
 import { Page } from 'puppeteer'
 
 export class Sunstar extends Source implements Source {
-    constructor(public puppeteerHandler: PuppeteerHandler) {
-        super()
-    }
-
     name = 'Sunstar'
     id = 'b19eac3c-9fe1-4abd-b146-75fbaa431c12'
     homepage = 'https://www.sunstar.com.ph/BAGUIO'
 
     getArticlesUrl = async (): Promise<string[]> => {
         const handler = async (page: Page): Promise<string[]> => {
-            page.goto(this.homepage, { waitUntil: 'load', timeout: 0 })
             await page.waitForSelector('.container')
 
             const links: string[] = await page.evaluate(() => {
@@ -34,6 +28,6 @@ export class Sunstar extends Source implements Source {
 
             return links
         }
-        return await this.puppeteerHandler.handlePage(handler)
+        return await this.puppeteerHandler.handlePage(handler, this.homepage)
     }
 }
