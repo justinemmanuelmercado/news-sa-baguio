@@ -27,8 +27,8 @@ function BottomLink({ name }: { name: string }) {
 
 function Menu(): JSX.Element {
     return (
-        <div className="h-full bg-green-500 text-gray-500 space-y-8 flex flex-col">
-            <div className="bg-green-300 space-y-8 py-8 pl-6">
+        <div className="h-full bg-gray-400 text-gray-200 space-y-8 flex flex-col">
+            <div className="bg-gray-500 space-y-8 py-8 pl-6">
                 <div className="text-6xl font-black">
                     <h1>Logo</h1>
                 </div>

@@ -10,14 +10,14 @@ const Article = ({ article }: { article: Article }) => {
     }, [article.description])
 
     return (
-        <div className="bg-gray-500 odd:bg-gray-400 flex flex-row rounded-sm mx-4 shadow-md">
+        <div className="bg-gray-500 odd:bg-gray-400 flex flex-row rounded-sm mx-1 shadow-md">
             <div className="px-6 py-6 space-y-2">
                 <h1 className="font-black text-2xl text-gray-200">{article.title}</h1>
                 <p className="text-gray-300 text-base">{description}</p>
             </div>
             {article.image ? (
                 <img
-                    className="object-cover h-auto w-1/4 rounded-sm border-8 border-gray-300"
+                    className="object-cover h-auto w-1/4 rounded-sm shadow-inner border-8 border-gray-300"
                     src={article.image}
                 ></img>
             ) : (
