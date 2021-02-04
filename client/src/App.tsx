@@ -1,17 +1,20 @@
 import React from 'react'
 import Menu from './components/Menu'
 import Articles from './components/Articles'
+import Content from './components/Content'
 
 export const App = (): JSX.Element => {
     return (
         <div className="w-screen h-screen grid grid-cols-main gap-0">
-            <section className="h-full max-w-xs">
+            <section className="h-full">
                 <Menu />
             </section>
             <section>
                 <Articles />
             </section>
-            <section className="bg-gray-500">Content</section>
+            <section>
+                <Content />
+            </section>
         </div>
     )
 }

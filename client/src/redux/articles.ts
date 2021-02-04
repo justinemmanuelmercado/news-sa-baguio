@@ -12,6 +12,7 @@ export interface Article {
     source?: string
     published?: string
     ttr?: number
+    content?: string
     createdAt?: string
 }
 

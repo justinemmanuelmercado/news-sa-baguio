@@ -11,10 +11,11 @@ class SbHandler {
         )
     }
 
+    private ARTICLE_DATA = 'ArticleData'
+
     getArticles = async ({ rangeMin, rangeMax }: RootState['filters']): Promise<Article[]> => {
-        console.log(rangeMin, rangeMax)
         const { data, error } = await this.client
-            .from('ArticleData')
+            .from(this.ARTICLE_DATA)
             .select(
                 `url, links, title, description, image, author, source, published, ttr, createdAt`,
             )
@@ -23,6 +24,20 @@ class SbHandler {
 
         if (!error) {
             return data
+        } else {
+            console.log(error.message)
+            throw new Error()
+        }
+    }
+
+    getArticleContent = async (id: string): Promise<string> => {
+        const { data, error } = await this.client
+            .from(this.ARTICLE_DATA)
+            .select(`content`)
+            .match({ id })
+
+        if (!error) {
+            return data[0]
         } else {
             console.log(error.message)
             throw new Error()
