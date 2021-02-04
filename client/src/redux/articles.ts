@@ -3,6 +3,7 @@ import { sb } from '../api'
 import { AppThunk } from './store'
 
 export interface Article {
+    id: string
     url?: string
     links?: string[]
     title?: string
@@ -12,7 +13,6 @@ export interface Article {
     source?: string
     published?: string
     ttr?: number
-    content?: string
     createdAt?: string
 }
 

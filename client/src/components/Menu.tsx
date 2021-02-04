@@ -41,7 +41,7 @@ function Menu(): JSX.Element {
                     <button className="btn bg-blue-200 hover:shadow-sm  w-full">Register</button>
                 </div>
             </div>
-            <div className="pl-6 flex flex-col justify-between flex-grow border-b border-green-300">
+            <div className="pl-6 flex flex-col justify-between flex-grow border-b border-green-400">
                 <div className="flex flex-col text-xl text-gray-200 space-y-2">
                     <MenuLink Icon={Home} name="Home" isActive={true} />
                     <MenuLink Icon={Filter} name="Filter" isActive={false} />
