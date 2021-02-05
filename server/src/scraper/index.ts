@@ -10,7 +10,7 @@ import { Pia } from './source/Pia'
 
     await puppeteerHandler.init()
     const supabase = new Supabase()
-
+    await supabase.initSkipUrls()
     const inq = new Inquirer(puppeteerHandler, supabase)
     const he = new Herald(puppeteerHandler, supabase)
     const sunstar = new Sunstar(puppeteerHandler, supabase)

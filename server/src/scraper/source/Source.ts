@@ -3,6 +3,8 @@ import { Article } from '../article'
 import { PuppeteerHandler } from '../puppeteer'
 import { Supabase } from '../supabase'
 import sanitize from 'sanitize-html'
+import difference from 'lodash/difference'
+import uniq from 'lodash/uniq'
 
 // Tags that get their content removed
 const DISALLOWED_TAGS = ['a', 'h1', 'h3', 'h2', 'span']
@@ -50,7 +52,8 @@ export abstract class Source {
      */
     protected getUrlsCleaned = async (): Promise<string[]> => {
         const urls = await this.getArticlesUrl()
-        return Array.from(new Set(urls))
+        const filteredUrls = uniq(urls)
+        return difference(filteredUrls, this.sb.skipUrls)
     }
 
     getData = async (articleUrl: string): Promise<ArticleData | void> => {

@@ -4,7 +4,9 @@ import { Article } from './article'
 config()
 
 export class Supabase {
-    client?: SupabaseClient
+    private client: SupabaseClient
+    skipUrls: string[] = []
+
     constructor() {
         const sbUrl = process.env.SB_URL
         const sbKey = process.env.SB_SERVICE_API_KEY
@@ -15,11 +17,32 @@ export class Supabase {
         }
     }
 
-    insertArticles = async (articles: Article[]): Promise<unknown[] | null | void> => {
-        if (!this.client) {
-            console.log('Supabase client not configured properly... Doing nothing')
-            return []
+    /**
+     * Get the first 200 URLs stored in the DB
+     * The purpose of this is to limit the amount
+     * of article scraping being done
+     */
+    initSkipUrls = async (): Promise<void> => {
+        console.log('Loading first 100 URLs')
+        const { data, error } = await this.client
+            .from('ArticleData')
+            .select('url')
+            .order('createdAt', { ascending: false })
+            .range(0, 99)
+        if (error) {
+            console.log(
+                'FAILED TO INSERT THE FOLLOWING BECAUSE OF THE FOLLOWING: ',
+                error.details,
+                error.hint,
+                error.code,
+            )
+            throw new Error(error.message)
         }
+
+        this.skipUrls = data?.map((val: { url: string }) => val.url) || []
+    }
+
+    insertArticles = async (articles: Article[]): Promise<unknown[] | null | void> => {
         const { data, error } = await this.client
             .from('ArticleData')
             .insert(articles, { onConflict: 'url', upsert: true })

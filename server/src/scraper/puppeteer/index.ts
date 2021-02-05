@@ -29,8 +29,10 @@ export class PuppeteerHandler {
             return await pageHandler(this.pages[url])
         } else if (this.browser && !this.pages[url]) {
             this.pages[url] = await this.browser?.newPage()
+            this.pages[url].setUserAgent(
+                'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+            )
             this.pages[url].goto(url, { waitUntil: 'load', timeout: 0 })
-
             return await pageHandler(this.pages[url])
         } else {
             throw new Error('Page and browser did not open correctly')
