@@ -5,14 +5,35 @@ import { Supabase } from '../supabase'
 import sanitize from 'sanitize-html'
 
 // Tags that get their content removed
-const REMOVE_CONTENT_FROM_TAGS = ['style', 'script', 'textarea', 'option', 'noscript', 'a']
+const DISALLOWED_TAGS = ['a', 'h1', 'h3', 'h2', 'span']
+const REMOVE_CONTENT_FROM_TAGS = ['style', 'script', 'textarea', 'option', 'noscript'].concat(
+    DISALLOWED_TAGS,
+)
 // Tags to remove from sanitize-html defaults
-const DISALLOWED_TAGS = ['a']
 // Tags to add to sanitize-html defaults
 const TAGS_TO_ADD = ['img']
 const ALLOWED_TAGS = sanitize.defaults.allowedTags
     .filter((tag) => !DISALLOWED_TAGS.includes(tag))
     .concat(TAGS_TO_ADD)
+
+const exclusiveFilter = (frame: sanitize.IFrame) => {
+    // <br> tags are special
+    if (frame.tag === 'br') {
+        return false
+    }
+
+    // if tag is empty return true
+    if (!frame.text.trim()) {
+        return true
+    }
+
+    // if tag contains less than 5 words return true
+    if (frame.text.trim().split(' ').length < 5) {
+        return true
+    }
+
+    return false
+}
 export abstract class Source {
     constructor(protected puppeteerHandler: PuppeteerHandler, protected sb: Supabase) {}
 
@@ -52,7 +73,7 @@ export abstract class Source {
                     newsSource: this.id,
                 })
             } catch (e) {
-                console.log(e)
+                console.log(e.message)
             }
         }
         console.log(`Finished scraping ${this.name}`)
@@ -86,6 +107,7 @@ export abstract class Source {
                 ? sanitize(article.content, {
                       allowedTags: ALLOWED_TAGS,
                       nonTextTags: REMOVE_CONTENT_FROM_TAGS,
+                      exclusiveFilter,
                   })
                 : ''
             return {
