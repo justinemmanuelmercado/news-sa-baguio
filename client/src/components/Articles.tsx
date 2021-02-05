@@ -49,7 +49,7 @@ function Articles(): JSX.Element {
 
     return (
         <div className="max-h-screen overflow-scroll bg-white">
-            <div className="space-y-4 py-4">
+            <div className="space-y-2 py-4">
                 {items.map((article) => {
                     return (
                         <Article
