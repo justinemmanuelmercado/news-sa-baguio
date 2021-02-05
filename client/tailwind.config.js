@@ -1,6 +1,7 @@
 // tailwind.config.js
 /* eslint-env node */
 module.exports = {
+    plugins: [require('@tailwindcss/typography')],
     theme: {
         extend: {
             gridTemplateColumns: {

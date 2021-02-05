@@ -1,9 +1,8 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Article, fetchArticles } from '../redux/articles'
 import { RootState } from '../redux/store'
 import { fetchContent } from '../redux/content'
-import truncate from 'lodash/truncate'
 
 type HandleArticleClick = (id: string) => void
 
@@ -14,10 +13,6 @@ const Article = ({
     article: Article
     handleArticleClick: HandleArticleClick
 }) => {
-    const description = useMemo(() => {
-        return truncate(article.description, { length: 100, omission: '...' })
-    }, [article.description])
-
     return (
         <button
             onClick={() => handleArticleClick(article.id)}
@@ -32,7 +27,6 @@ const Article = ({
             )}
             <div className={`px-6 py-6 space-y-2 ${article.image ? 'w-3/4' : ''}`}>
                 <h1 className="font-black text-2xl text-black">{article.title}</h1>
-                <p className="text-gray-800 text-base">{description}</p>
             </div>
         </button>
     )
