@@ -2,6 +2,17 @@ import { ArticleData, extract } from 'article-parser'
 import { Article } from '../article'
 import { PuppeteerHandler } from '../puppeteer'
 import { Supabase } from '../supabase'
+import sanitize from 'sanitize-html'
+
+// Tags that get their content removed
+const REMOVE_CONTENT_FROM_TAGS = ['style', 'script', 'textarea', 'option', 'noscript', 'a']
+// Tags to remove from sanitize-html defaults
+const DISALLOWED_TAGS = ['a']
+// Tags to add to sanitize-html defaults
+const TAGS_TO_ADD = ['img']
+const ALLOWED_TAGS = sanitize.defaults.allowedTags
+    .filter((tag) => !DISALLOWED_TAGS.includes(tag))
+    .concat(TAGS_TO_ADD)
 export abstract class Source {
     constructor(protected puppeteerHandler: PuppeteerHandler, protected sb: Supabase) {}
 
@@ -12,8 +23,6 @@ export abstract class Source {
      * This is how a list of article URLs to scrape are collected
      */
     abstract getArticlesUrl: () => Promise<string[]>
-
-    protected articles: Article[] = []
 
     /**
      * Remove duplicate URLs and if there additional url cleaning done
@@ -31,11 +40,10 @@ export abstract class Source {
         return articleData
     }
 
-    private scrape = async (): Promise<void> => {
+    private scrape = async (articleUrls: string[]): Promise<Article[]> => {
         console.log(`Scraping ${this.name}`)
-        const articles = await this.getUrlsCleaned()
         const articlesData: Article[] = []
-        for (const articleUrl of articles) {
+        for (const articleUrl of articleUrls) {
             try {
                 const articleData = await this.getData(articleUrl)
 
@@ -48,14 +56,14 @@ export abstract class Source {
             }
         }
         console.log(`Finished scraping ${this.name}`)
-        this.articles = articlesData
+        return articlesData
     }
 
-    private insertScraped = async (): Promise<void> => {
+    private insertScraped = async (articles: Article[]): Promise<void> => {
         console.log(`Starting article inserts for ${this.name}`)
-        if (this.articles.length > 0) {
+        if (articles.length > 0) {
             try {
-                const inserted = await this.sb.insertArticles(this.articles)
+                const inserted = await this.sb.insertArticles(articles)
                 if (inserted) {
                     console.log(`Inserted ${inserted.length} articles for ${this.name}`)
                 }
@@ -71,8 +79,26 @@ export abstract class Source {
         }
     }
 
+    private cleanScraped = async (dirtyArticles: Article[]): Promise<Article[]> => {
+        console.log(`CLEANING CONTENT FOR ${this.name}`)
+        return dirtyArticles.map((article) => {
+            const newContent = article.content
+                ? sanitize(article.content, {
+                      allowedTags: ALLOWED_TAGS,
+                      nonTextTags: REMOVE_CONTENT_FROM_TAGS,
+                  })
+                : ''
+            return {
+                ...article,
+                content: newContent,
+            }
+        })
+    }
+
     public scrapeAndInsert = async (): Promise<void> => {
-        await this.scrape()
-        await this.insertScraped()
+        const articleUrls = await this.getUrlsCleaned()
+        const scrapedArticles = await this.scrape(articleUrls)
+        const cleanArticles = await this.cleanScraped(scrapedArticles)
+        await this.insertScraped(cleanArticles)
     }
 }

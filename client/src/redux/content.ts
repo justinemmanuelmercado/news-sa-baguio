@@ -16,12 +16,13 @@ export interface Content {
 }
 
 interface ContentState {
-    item?: Content
+    item: Content | null
     status: 'idle' | 'loading' | 'succeeded' | 'failed'
     error: string
 }
 
 const initialContentState: ContentState = {
+    item: null,
     error: '',
     status: 'idle',
 }
