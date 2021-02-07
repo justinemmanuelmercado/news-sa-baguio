@@ -12,8 +12,8 @@ export class PuppeteerHandler {
                 args: ['--disable-setuid-sandbox', '--single-process'],
                 ignoreHTTPSErrors: true,
             })
-            process.on('unhandledRejection', () => {
-                console.error('Unhandled Rejection at: Promise')
+            process.on('unhandledRejection', (reason: Error) => {
+                console.error('Unhandled Rejection at: Promise', reason.message)
             })
         }
     }

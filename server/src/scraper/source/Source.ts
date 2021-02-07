@@ -73,6 +73,7 @@ export abstract class Source {
 
                 articlesData.push({
                     ...articleData,
+                    url: articleUrl,
                     newsSource: this.id,
                 })
             } catch (e) {

@@ -9,7 +9,7 @@ interface FiltersState {
 const initialFiltersState: FiltersState = {
     sources: ['ABS CBN', 'SunStar', 'Inquirer', 'Herald Express', 'Philippine Information Agency'],
     rangeMin: 0,
-    rangeMax: 9,
+    rangeMax: 19,
 }
 
 export const filtersSlice = createSlice({
