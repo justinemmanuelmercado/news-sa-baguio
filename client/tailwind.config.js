@@ -5,7 +5,7 @@ module.exports = {
     theme: {
         extend: {
             gridTemplateColumns: {
-                main: '12rem minmax(20rem, 1fr) 1fr',
+                main: '15rem 0.8fr 1.2fr',
             },
         },
         colors: {
