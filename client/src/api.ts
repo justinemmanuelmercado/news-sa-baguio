@@ -1,6 +1,7 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js'
 import { Article } from './redux/articles'
 import { Content } from './redux/content'
+import { NewsSource } from './redux/filters'
 import { RootState } from './redux/store'
 
 class SbHandler {
@@ -13,6 +14,7 @@ class SbHandler {
     }
 
     private ARTICLE_DATA = 'ArticleData'
+    private NEWS_SOURCE = 'NewsSource'
 
     getArticles = async ({ rangeMin, rangeMax }: RootState['filters']): Promise<Article[]> => {
         const { data, error } = await this.client
@@ -41,6 +43,19 @@ class SbHandler {
 
         if (!error) {
             return data[0]
+        } else {
+            console.log(error.message)
+            throw new Error()
+        }
+    }
+
+    getNewsSources = async (): Promise<NewsSource[]> => {
+        const { data, error } = await this.client
+            .from(this.NEWS_SOURCE)
+            .select('id, name, homepage')
+
+        if (!error) {
+            return data as NewsSource[]
         } else {
             console.log(error.message)
             throw new Error()
