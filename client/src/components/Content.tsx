@@ -29,7 +29,7 @@ function Content(): JSX.Element {
                         </h1>
                     </div>
                     <div className="bg-gray-100 w-full p-4">
-                        <div className="p-4 bg-gray-50 shadow-md">
+                        <div className="py-2 px-6 bg-gray-50 shadow-md">
                             <div
                                 className="prose-lg"
                                 dangerouslySetInnerHTML={{

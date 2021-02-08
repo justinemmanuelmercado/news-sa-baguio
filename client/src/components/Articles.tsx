@@ -26,7 +26,7 @@ const Article = ({
                 ''
             )}
             <div className={`px-6 py-6 space-y-2 ${article.image ? 'w-3/4' : ''}`}>
-                <h1 className="font-black text-2xl text-black">{article.title}</h1>
+                <h1 className="font-bold text-2xl text-black">{article.title}</h1>
             </div>
         </button>
     )
@@ -49,7 +49,7 @@ function Articles(): JSX.Element {
 
     return (
         <div className="max-h-screen overflow-scroll bg-white">
-            <div className="space-y-2 py-4">
+            <div className="space-y-4 py-4">
                 {items.map((article) => {
                     return (
                         <Article
