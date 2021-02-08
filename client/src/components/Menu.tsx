@@ -1,5 +1,5 @@
 import React from 'react'
-import { Home, Filter, List, Settings, Columns, IconProps } from 'react-feather'
+import { Filter, Settings, Columns, IconProps } from 'react-feather'
 
 function MenuLink({
     name,
@@ -14,7 +14,7 @@ function MenuLink({
         <span
             className={`${
                 isActive ? 'font-black text-white' : ''
-            } flex flex-row space-x-2 cursor-pointer`}
+            } flex flex-row space-x-2 cursor-pointer pl-4 py-2`}
         >
             <Icon /> <span>{name}</span>
         </span>
@@ -31,26 +31,15 @@ function BottomLink({ name }: { name: string }) {
 
 function Menu(): JSX.Element {
     return (
-        <div className="h-full bg-green-200 text-white space-y-8 flex flex-col">
-            <div className="space-y-8 py-8 border-b border-green-300">
-                <div className="text-6xl font-black px-4">
-                    <h1>BC</h1>
-                </div>
-                <div className="space-y-1 px-4">
-                    <button className="btn bg-blue-300 hover:shadow-sm w-full">Sign In</button>
-                    <button className="btn bg-blue-200 hover:shadow-sm  w-full">Register</button>
-                </div>
-            </div>
-            <div className="pl-6 flex flex-col justify-between flex-grow border-b border-green-400">
+        <div className="h-full bg-green-500 text-white space-y-8 flex flex-col py-6 shadow-2xl">
+            <div className="flex flex-col justify-between flex-grow border-b border-green-400">
                 <div className="flex flex-col text-xl text-gray-200 space-y-2">
-                    <MenuLink Icon={Home} name="Home" isActive={true} />
                     <MenuLink Icon={Filter} name="Filter" isActive={false} />
-                    <MenuLink Icon={List} name="Sort" isActive={false} />
                     <MenuLink Icon={Columns} name="Sources" isActive={false} />
                     <MenuLink Icon={Settings} name="Options" isActive={false} />
                 </div>
             </div>
-            <div className="pl-6 pb-6">
+            <div className="pl-4">
                 <BottomLink name="Contact" />
                 <BottomLink name="About" />
                 <BottomLink name="Terms" />

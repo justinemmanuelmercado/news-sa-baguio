@@ -16,10 +16,10 @@ const Article = ({
     return (
         <button
             onClick={() => handleArticleClick(article.id)}
-            className="bg-gray-100 odd:bg-gray-50 flex flex-row rounded-sm mx-4 shadow-sm cursor-pointer text-left"
+            className="bg-gray-100 odd:bg-gray-50 flex flex-row rounded-sm shadow-sm cursor-pointer text-left mx-3"
         >
             {article.image ? (
-                <div className="w-1/4 border-r-8 border-gray-200 rounded-sm">
+                <div className="w-1/4 rounded-sm">
                     <img className="object-cover h-full rounded-sm" src={article.image}></img>
                 </div>
             ) : (
