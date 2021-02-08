@@ -1,10 +1,12 @@
 import { config } from 'dotenv'
 import { createClient, SupabaseClient } from '@supabase/supabase-js'
 import { Article } from './article'
+import { log } from './logger'
 config()
 
 export class Supabase {
     private client: SupabaseClient
+    private topic = 'SUPABASE'
     skipUrls: string[] = []
 
     constructor() {
@@ -23,19 +25,15 @@ export class Supabase {
      * of article scraping being done
      */
     initSkipUrls = async (): Promise<void> => {
-        console.log('Loading first 200 URLs')
+        log('Loading first 200 URLs', this.topic)
         const { data, error } = await this.client
             .from('ArticleData')
             .select('url')
             .order('createdAt', { ascending: false })
             .range(0, 199)
         if (error) {
-            console.log(
-                'FAILED TO INSERT THE FOLLOWING BECAUSE OF THE FOLLOWING: ',
-                error.details,
-                error.hint,
-                error.code,
-            )
+            log('FAILED TO INSERT THE FOLLOWING BECAUSE OF THE FOLLOWING: ', this.topic, false)
+            log(error.details, this.topic, false)
             throw new Error(error.message)
         }
 
@@ -48,12 +46,7 @@ export class Supabase {
             .insert(articles, { onConflict: 'url', upsert: true })
 
         if (error) {
-            console.log(
-                'FAILED TO INSERT THE FOLLOWING BECAUSE OF THE FOLLOWING: ',
-                error.details,
-                error.hint,
-                error.code,
-            )
+            log('FAILED TO INSERT THE FOLLOWING BECAUSE OF THE FOLLOWING: ', this.topic, false)
             throw new Error(error.message)
         }
 

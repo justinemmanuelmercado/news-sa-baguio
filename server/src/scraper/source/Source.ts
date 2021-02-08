@@ -5,6 +5,7 @@ import { Supabase } from '../supabase'
 import sanitize from 'sanitize-html'
 import difference from 'lodash/difference'
 import uniq from 'lodash/uniq'
+import { log } from '../logger'
 
 // Tags that get their content removed
 const DISALLOWED_TAGS = ['a', 'h1', 'h3', 'h2', 'span']
@@ -65,7 +66,7 @@ export abstract class Source {
     }
 
     private scrape = async (articleUrls: string[]): Promise<Article[]> => {
-        console.log(`Scraping ${this.name}`)
+        log(`Scraping ${this.name}`, this.name, true)
         const articlesData: Article[] = []
         for (const articleUrl of articleUrls) {
             try {
@@ -77,35 +78,35 @@ export abstract class Source {
                     newsSource: this.id,
                 })
             } catch (e) {
-                console.log(e.message)
+                log(e.message, this.name, false)
             }
         }
-        console.log(`Finished scraping ${this.name}`)
+        log(`Finished scraping ${this.name}`, this.name, true)
         return articlesData
     }
 
     private insertScraped = async (articles: Article[]): Promise<void> => {
-        console.log(`Starting article inserts for ${this.name}`)
+        log(`Starting article inserts for ${this.name}`, this.name, true)
         if (articles.length > 0) {
             try {
                 const inserted = await this.sb.insertArticles(articles)
                 if (inserted) {
-                    console.log(`Inserted ${inserted.length} articles for ${this.name}`)
+                    log(`Inserted ${inserted.length} articles for ${this.name}`)
                 }
             } catch (e) {
-                console.log(`Insert failed`)
-                console.log(e)
+                log(`Insert failed`, this.name, false)
+                log(e.message, this.name, false)
             } finally {
-                console.log(`Ending insert articles for ${this.name}`)
+                log(`Ending insert articles for ${this.name}`, this.name, true)
             }
         } else {
-            console.log(`No articles found to insert for ${this.name}`)
-            console.log(`Ending insert articles for ${this.name}`)
+            log(`No articles found to insert for ${this.name}`, this.name, true)
+            log(`Ending insert articles for ${this.name}`, this.name, true)
         }
     }
 
     private cleanScraped = async (dirtyArticles: Article[]): Promise<Article[]> => {
-        console.log(`CLEANING CONTENT FOR ${this.name}`)
+        log(`CLEANING CONTENT FOR ${this.name}`, this.name, true)
         return dirtyArticles.map((article) => {
             const newContent = article.content
                 ? sanitize(article.content, {

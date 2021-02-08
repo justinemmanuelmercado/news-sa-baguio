@@ -5,28 +5,22 @@ import { puppeteerHandler } from './puppeteer'
 import { Sunstar } from './source/Sunstar'
 import { Abscbn } from './source/Abscbn'
 import { Pia } from './source/Pia'
+import { log } from './logger'
 ;(async () => {
-    console.log('SCRAPING STARTED')
+    log('SCRAPING STARTED')
 
     await puppeteerHandler.init()
     const supabase = new Supabase()
     await supabase.initSkipUrls()
-    const inq = new Inquirer(puppeteerHandler, supabase)
-    const he = new Herald(puppeteerHandler, supabase)
-    const sunstar = new Sunstar(puppeteerHandler, supabase)
-    const abs = new Abscbn(puppeteerHandler, supabase)
-    const pia = new Pia(puppeteerHandler, supabase)
 
     await Promise.all([
-        inq.scrapeAndInsert(),
-        he.scrapeAndInsert(),
-        sunstar.scrapeAndInsert(),
-        abs.scrapeAndInsert(),
-        pia.scrapeAndInsert(),
-    ]).catch((e) => {
-        console.log(`Failed scraping`, e)
+        new Inquirer(puppeteerHandler, supabase).scrapeAndInsert(),
+        new Herald(puppeteerHandler, supabase).scrapeAndInsert(),
+        new Sunstar(puppeteerHandler, supabase).scrapeAndInsert(),
+        new Abscbn(puppeteerHandler, supabase).scrapeAndInsert(),
+        new Pia(puppeteerHandler, supabase).scrapeAndInsert(),
+    ]).finally(async () => {
+        await puppeteerHandler.closeBrowser()
+        log('SCRAPING ENDED')
     })
-
-    await puppeteerHandler.closeBrowser()
-    console.log('SCRAPING ENDED')
 })()

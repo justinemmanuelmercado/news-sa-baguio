@@ -1,11 +1,13 @@
 import puppeteer, { Browser, Page } from 'puppeteer'
+import { log } from '../logger'
 
 export class PuppeteerHandler {
     private browser?: Browser
     private pages: Record<string, Page> = {}
+    private topic = 'PUPPETEER'
     init = async (): Promise<void> => {
         if (!this.browser) {
-            console.log('Opening the browser...')
+            log('Opening the browser...', this.topic, true)
 
             this.browser = await puppeteer.launch({
                 headless: true,
@@ -13,7 +15,7 @@ export class PuppeteerHandler {
                 ignoreHTTPSErrors: true,
             })
             process.on('unhandledRejection', (reason: Error) => {
-                console.error('Unhandled Rejection at: Promise', reason.message)
+                log('Unhandled Rejection at: Promise: ' + reason.message, this.topic, false)
             })
         }
     }
@@ -24,34 +26,32 @@ export class PuppeteerHandler {
         }
 
         if (this.pages[url]) {
-            this.pages[url].goto(url, { waitUntil: 'load', timeout: 0 })
+            this.pages[url].goto(url, { waitUntil: ['load', 'networkidle2'], timeout: 0 })
 
-            return await pageHandler(this.pages[url])
+            const result = await pageHandler(this.pages[url])
+            await this.pages[url].close()
+            return result
         } else if (this.browser && !this.pages[url]) {
             this.pages[url] = await this.browser?.newPage()
             this.pages[url].setUserAgent(
                 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
             )
-            this.pages[url].goto(url, { waitUntil: 'load', timeout: 0 })
-            return await pageHandler(this.pages[url])
+            this.pages[url].goto(url, { waitUntil: ['load', 'networkidle2'], timeout: 0 })
+            const result = await pageHandler(this.pages[url])
+            await this.pages[url].close()
+            return result
         } else {
             throw new Error('Page and browser did not open correctly')
         }
     }
 
+    closePage = async (url: string): Promise<void> => {
+        log(`Closing page for ${url}`, this.topic, false)
+        await this.pages[url].close()
+    }
+
     closeBrowser = async (): Promise<void> => {
-        for (const [index, page] of Object.entries(this.pages)) {
-            console.log(`Closing page for ${index}`)
-            await page.close()
-            delete this.pages[index]
-        }
-
-        if (Object.keys(this.pages).length !== 0) {
-            console.log('Pages did not close for some reason :/ ')
-            console.log(Object.keys(this.pages).map((key) => `${key} is not closed`))
-        }
-
-        console.log('Closing browser...')
+        log('Closing browser...', this.topic, false)
         await this.browser?.close()
     }
 }

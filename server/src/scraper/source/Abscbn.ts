@@ -1,4 +1,3 @@
-import { PuppeteerHandler } from '../puppeteer'
 import { Source } from './Source'
 import { Page } from 'puppeteer'
 
