@@ -3,6 +3,18 @@ import { fetchSources } from '../../redux/filters'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
 import dayjs from 'dayjs'
+
+function DateInput(
+    props: React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
+) {
+    return (
+        <input
+            {...props}
+            className="mt-2 py-3 px-2 rounded-md focus:ring-2 focus:ring-blue-500 text-base text-black"
+        />
+    )
+}
+
 function FilterMenu(): JSX.Element {
     const { sources, hiddenSources } = useSelector((state: RootState) => state.filters)
     const dispatch = useDispatch()
@@ -33,10 +45,10 @@ function FilterMenu(): JSX.Element {
         fetchAll()
     }, [])
     return (
-        <div className="bg-green-500 shadow-inner py-4 px-4 text-base flex flex-col space-y-2">
+        <>
             <span>
-                <span className="font-bold">By author</span>
-                <ul className="font-light pt-2 pl-2">
+                <span className="font-bold uppercase">sources</span>
+                <ul className="pt-4 pl-2">
                     {sources.map((source) => {
                         return (
                             <li key={source.id}>
@@ -56,37 +68,35 @@ function FilterMenu(): JSX.Element {
                 </ul>
             </span>
             <div>
-                <span className="font-bold">By date</span>
-                <span className="flex flex-col pt-2 pl-2 space-y-2">
+                <span className="font-bold uppercase">date</span>
+                <span className="flex flex-col pt-4 pl-2 space-y-2">
                     <span className="flex flex-col">
                         <label htmlFor="from">From:</label>
-                        <input
+                        <DateInput
                             id="from"
                             placeholder={dateFormat}
                             value={from.format(dateFormat)}
                             onChange={handleDateChange}
                             min={min}
                             max={to.format(dateFormat)}
-                            className="mt-2 py-3 px-2 rounded-md focus:ring-2 focus:ring-blue-100 text-base text-black"
                             type="date"
                         />
                     </span>
                     <span className="flex flex-col">
                         <label htmlFor="to">To:</label>
-                        <input
+                        <DateInput
                             id="to"
                             value={to.format(dateFormat)}
                             placeholder={dateFormat}
                             onChange={handleDateChange}
                             min={from.format(dateFormat)}
                             max={max}
-                            className="mt-2 py-3 px-2 rounded-md focus:ring-2 focus:ring-blue-100 text-base text-black"
                             type="date"
                         />
                     </span>
                 </span>
             </div>
-        </div>
+        </>
     )
 }
 

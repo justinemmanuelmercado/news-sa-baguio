@@ -3,10 +3,11 @@
 module.exports = {
     plugins: [require('@tailwindcss/typography')],
     theme: {
-        extend: {
-            gridTemplateColumns: {
-                main: '15rem 0.8fr 1.2fr',
-            },
+        gridTemplateColumns: {
+            main: '15rem 0.8fr 1.2fr',
+        },
+        transitionProperty: {
+            'max-height': 'max-height',
         },
         colors: {
             transparent: 'transparent',
