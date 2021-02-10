@@ -4,9 +4,9 @@ import { AppThunk } from './store'
 
 export interface Content {
     id: string
-    url: string
-    body: string
-    title: string
+    url?: string
+    body?: string
+    title?: string
     author?: string
     description?: string
     published?: string
@@ -31,6 +31,14 @@ export const contentSlice = createSlice({
     name: 'content',
     initialState: initialContentState,
     reducers: {
+        /**
+         * This is mainly for getting the
+         * articles list to identify
+         * which article is selected
+         */
+        setContentId(state, action: PayloadAction<{ id: string }>) {
+            state.item = { id: action.payload.id }
+        },
         setContentLoading(state) {
             state.status = 'loading'
         },
@@ -46,9 +54,15 @@ export const contentSlice = createSlice({
     },
 })
 
-export const { getContentSuccess, getContentFailed, setContentLoading } = contentSlice.actions
+export const {
+    getContentSuccess,
+    getContentFailed,
+    setContentLoading,
+    setContentId,
+} = contentSlice.actions
 
 export const fetchContent = (id: string): AppThunk => async (dispatch) => {
+    dispatch(setContentId({ id }))
     try {
         dispatch(setContentLoading())
         const result = await sb.getArticleContent(id)

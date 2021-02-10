@@ -28,8 +28,8 @@ function Content(): JSX.Element {
                             {item.title ? item.title : ''}
                         </h1>
                     </div>
-                    <div className="bg-gray-100 w-full p-4">
-                        <div className="py-2 px-6 bg-gray-50 shadow-md">
+                    <div className="bg-gray-100 w-full p-4 border">
+                        <div className="py-12 px-6 bg-gray-50 border shadow-xl">
                             <div
                                 className="prose-lg"
                                 dangerouslySetInnerHTML={{
