@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../redux/store'
 
-function Loading({ isLoading }: { isLoading: boolean }): JSX.Element {
+function Blank({ isLoading }: { isLoading: boolean }): JSX.Element {
     return (
         <article className={`${isLoading ? 'animate-pulse' : ''} `}>
             <div>
@@ -47,8 +47,9 @@ function Content(): JSX.Element {
     const { item, status } = useSelector((state: RootState) => state.content)
     return (
         <div className="overflow-y-auto h-screen">
-            {status === 'loading' ? <Loading isLoading={true} /> : ''}
-            {item ? (
+            {status === 'idle' && <Blank isLoading={false} />}
+            {status === 'loading' && <Blank isLoading={true} />}
+            {status === 'succeeded' && (
                 <article>
                     <div>
                         {item.image ? (
@@ -76,8 +77,6 @@ function Content(): JSX.Element {
                         </div>
                     </div>
                 </article>
-            ) : (
-                <Loading isLoading={false} />
             )}
         </div>
     )
