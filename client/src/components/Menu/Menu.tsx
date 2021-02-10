@@ -55,7 +55,7 @@ function Menu(): JSX.Element {
     }
 
     return (
-        <div className="h-screen bg-gray-200 text-black flex flex-col shadow-2xl">
+        <div className="h-screen bg-gray-50 text-black flex flex-col shadow-2xl">
             <div className="flex flex-col justify-between flex-grow overflow-y-auto">
                 <div className="flex flex-col">
                     {menus.map(({ name, MenuComponent, Icon }) => {
@@ -64,7 +64,7 @@ function Menu(): JSX.Element {
                         return (
                             <>
                                 <button
-                                    className="pl-4 py-2 bg-gray-100"
+                                    className="pl-4 py-2 bg-gray-200"
                                     onClick={() => {
                                         toggleExpand(name)
                                     }}
@@ -76,7 +76,7 @@ function Menu(): JSX.Element {
                                         isActive ? 'max-h-full' : 'max-h-0'
                                     } transition-max-height overflow-hidden`}
                                 >
-                                    <div className="py-8 px-6 text-base space-y-4 bg-gray-300 shadow-inner">
+                                    <div className="py-8 px-6 text-base space-y-4 bg-gray-100 shadow-inner">
                                         <MenuComponent />
                                     </div>
                                 </div>

@@ -9,7 +9,7 @@ type HandleArticleClick = (id: string) => void
 
 const LoadingArticle = () => {
     return (
-        <div className="animate-pulse bg-gray-100 odd:bg-gray-50 flex flex-row rounded-sm shadow-lg text-left max-h-36 hover:text-green-100 border border-gray-600 w-full">
+        <div className="animate-pulse bg-gray-100 odd:bg-gray-50 flex flex-row rounded-sm shadow-lg text-left max-h-36 hover:text-green-100 border border-gray-300 w-full">
             <div className="w-1/4 rounded-sm p-1 h-36">
                 <div className="bg-gray-200 w-full h-full"></div>
             </div>
@@ -38,7 +38,9 @@ const Article = ({
     return (
         <button
             onClick={() => handleArticleClick(article.id)}
-            className="bg-gray-100 odd:bg-gray-50 flex flex-row rounded-sm shadow-lg cursor-pointer text-left max-h-36 hover:text-green-100 border border-gray-600 w-full"
+            className={`bg-gray-100 odd:bg-gray-50 flex flex-row rounded-sm cursor-pointer text-left max-h-36 hover:text-green-100 border border-gray-300 w-full ${
+                selected ? 'shadow-inner' : 'shadow-lg'
+            }`}
         >
             {article.image ? (
                 <div className="w-1/4 h-36 overflow-hidden rounded-sm p-1">
@@ -48,8 +50,8 @@ const Article = ({
                 ''
             )}
             <div
-                className={`p-4 h-36 ${article.image ? 'w-3/4' : ''} ${
-                    selected ? 'border-r-8 border-green-100' : ''
+                className={`px-4 py-2 h-36 ${article.image ? 'w-3/4' : ''} ${
+                    selected ? 'border-r-4 border-green-100' : ''
                 }`}
             >
                 <h1 className="font-bold text-xl">{title}</h1>
