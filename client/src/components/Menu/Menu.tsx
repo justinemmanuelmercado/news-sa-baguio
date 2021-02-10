@@ -1,14 +1,7 @@
 import React from 'react'
-import {
-    Filter,
-    Settings,
-    Columns,
-    IconProps,
-    ChevronDown,
-    Search,
-    ChevronsLeft,
-} from 'react-feather'
+import { Filter, Settings, IconProps, ChevronDown, Search, ChevronsLeft } from 'react-feather'
 import FilterMenu from './FilterMenu'
+import SearchMenu from './SearchMenu'
 
 function MenuLink({
     name,
@@ -38,6 +31,7 @@ function Menu(): JSX.Element {
                     <div className="pl-4">
                         <MenuLink Icon={Search} name="Search" isActive={false} />
                     </div>
+                    <SearchMenu />
                     <div className="pl-4">
                         <MenuLink Icon={Settings} name="Options" isActive={false} />
                     </div>

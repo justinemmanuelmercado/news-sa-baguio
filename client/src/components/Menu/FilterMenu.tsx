@@ -67,7 +67,7 @@ function FilterMenu(): JSX.Element {
                             onChange={handleDateChange}
                             min={min}
                             max={to.format(dateFormat)}
-                            className="mt-2 py-1 px-2 rounded-md focus:ring-2 focus:ring-blue-100 text-base text-black"
+                            className="mt-2 py-3 px-2 rounded-md focus:ring-2 focus:ring-blue-100 text-base text-black"
                             type="date"
                         />
                     </span>
@@ -80,7 +80,7 @@ function FilterMenu(): JSX.Element {
                             onChange={handleDateChange}
                             min={from.format(dateFormat)}
                             max={max}
-                            className="mt-2 py-1 px-2 rounded-md focus:ring-2 focus:ring-blue-100 text-base text-black"
+                            className="mt-2 py-3 px-2 rounded-md focus:ring-2 focus:ring-blue-100 text-base text-black"
                             type="date"
                         />
                     </span>
