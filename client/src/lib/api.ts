@@ -1,8 +1,8 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js'
-import { Article } from './redux/articles'
-import { Content } from './redux/content'
-import { NewsSource } from './redux/filters'
-import { RootState } from './redux/store'
+import { Article } from '../redux/articles'
+import { Content } from '../redux/content'
+import { NewsSource } from '../redux/filters'
+import { RootState } from '../redux/store'
 
 class SbHandler {
     private client: SupabaseClient
@@ -20,7 +20,7 @@ class SbHandler {
         const { data, error } = await this.client
             .from(this.ARTICLE_DATA)
             .select(
-                `id, url, links, title, description, image, author, source, published, ttr, createdAt`,
+                `id, url, links, title, description, image, author, source, published, ttr, createdAt, newsSource:NewsSource ( name, homepage, id )`,
             )
             .order('createdAt', { ascending: false })
             .range(rangeMin, rangeMax)
