@@ -2,7 +2,7 @@ import { Source } from './Source'
 import { Page } from 'puppeteer'
 
 export class Pia extends Source implements Source {
-    name = 'Philippine Information Agency'
+    name = 'PIA'
     id = 'edde96e9-2078-488e-8926-c4ecbd22f695'
     homepage = 'https://pia.gov.ph/news/regions/cordillera'
 
