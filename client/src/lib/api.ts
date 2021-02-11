@@ -37,7 +37,7 @@ class SbHandler {
         const { data, error } = await this.client
             .from(this.ARTICLE_DATA)
             .select(
-                `id, url, body:content, title, author, description, published, createdAt, links, image`,
+                `id, url, body:content, title, author, description, published, createdAt, links, image, newsSource:NewsSource ( name, homepage, id )`,
             )
             .match({ id })
 

@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { sb } from '../lib/api'
+import { NewsSource } from './filters'
 import { AppThunk } from './store'
 
 export interface Content {
@@ -13,6 +14,7 @@ export interface Content {
     createdAt?: string
     links?: string
     image?: string
+    newsSource: NewsSource
 }
 
 interface ContentState {

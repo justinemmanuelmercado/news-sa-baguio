@@ -19,6 +19,7 @@ const ArticleItem = ({
     const title = useMemo(() => {
         return truncate(article.title, { length: 110, separator: ' ', omission: '...' })
     }, [article.title])
+
     const createdAtString = useMemo(() => {
         return dayjs(article.createdAt).format('MMMM DD, YYYY')
     }, [article.createdAt])
@@ -64,24 +65,27 @@ const ArticleItem = ({
                 >
                     <div>
                         <div className="space-x-4">
-                            <span className="font-bold text-black">
+                            <span className="text-black">
                                 {article.author ? article.author : article.newsSource.name}
                             </span>
                             <span className="font-light text-gray-600">{createdAtString}</span>
                         </div>
-                        <h1 className="text-lg font-bold">{title}</h1>
+                        <h1 className="text-base font-bold">{title}</h1>
                     </div>
                     <div
                         onClick={(evt) => evt.stopPropagation()}
                         className="bg-gray-200 flex space-x-4 cursor-default px-2 h-8 self-end overflow-hidden"
                     >
                         <a
-                            className="underline text-gray-700 flex items-center"
+                            className="underline text-gray-700 flex items-center hover:text-green-100"
                             href={article.newsSource.homepage}
                         >
                             <ExternalLink className="mr-1" size="1rem" /> {article.newsSource.name}
                         </a>
-                        <a className="underline text-gray-700 flex items-center" href={article.url}>
+                        <a
+                            className="underline text-gray-700 flex items-center hover:text-green-100"
+                            href={article.url}
+                        >
                             <Link className="mr-1" size="1rem" /> Article page
                         </a>
                     </div>
