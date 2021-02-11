@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react'
 import { Article } from '../../redux/articles'
 import truncate from 'lodash/truncate'
 import { ExternalLink, Link } from 'react-feather'
+import dayjs from 'dayjs'
 
 type HandleArticleClick = (id: string) => void
 
@@ -18,6 +19,9 @@ const ArticleItem = ({
     const title = useMemo(() => {
         return truncate(article.title, { length: 110, separator: ' ', omission: '...' })
     }, [article.title])
+    const createdAtString = useMemo(() => {
+        return dayjs(article.createdAt).format('MMMM DD, YYYY')
+    }, [article.createdAt])
 
     const handleOnload = () => {
         setImageDidLoad(true)
@@ -27,12 +31,12 @@ const ArticleItem = ({
         <div>
             <button
                 onClick={() => handleArticleClick(article.id)}
-                className={`bg-gray-100 odd:bg-gray-50 flex flex-row rounded-sm cursor-pointer text-left max-h-36 hover:text-green-100 border border-gray-300 w-full ${
+                className={`bg-gray-100 odd:bg-gray-50 flex flex-row rounded-sm cursor-pointer text-left max-h-32 hover:text-green-100 border border-gray-300 w-full ${
                     selected ? 'shadow-inner' : 'shadow-lg'
                 }`}
             >
                 {article.image ? (
-                    <div className="w-1/4 h-36 py-1 overflow-hidden rounded-sm">
+                    <div className="w-1/4 h-32 py-1 overflow-hidden rounded-sm">
                         <img
                             className={`object-cover h-full rounded-sm ${
                                 imageDidLoad ? '' : 'hidden'
@@ -54,15 +58,22 @@ const ArticleItem = ({
                     ''
                 )}
                 <div
-                    className={`h-36 py-1 flex flex-col justify-between ${
+                    className={`h-32 pl-4 py-1 flex flex-col justify-between ${
                         article.image ? 'w-3/4' : ''
                     } ${selected ? 'border-r-4 border-green-100' : ''}`}
                 >
-                    <div className="text-light"></div>
-                    <h1 className="px-4 py-2 font-bold text-xl">{title}</h1>
+                    <div>
+                        <div className="space-x-4">
+                            <span className="font-bold text-black">
+                                {article.author ? article.author : article.newsSource.name}
+                            </span>
+                            <span className="font-light text-gray-600">{createdAtString}</span>
+                        </div>
+                        <h1 className="text-lg font-bold">{title}</h1>
+                    </div>
                     <div
                         onClick={(evt) => evt.stopPropagation()}
-                        className="bg-gray-200 flex space-x-4 cursor-default px-4 h-12 self-end overflow-hidden"
+                        className="bg-gray-200 flex space-x-4 cursor-default px-2 h-8 self-end overflow-hidden"
                     >
                         <a
                             className="underline text-gray-700 flex items-center"
