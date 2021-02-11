@@ -1,6 +1,6 @@
 import React from 'react'
 import Menu from './components/Menu/Menu'
-import Articles from './components/Articles'
+import ArticlesList from './components/ArticlesList/ArticlesList'
 import Content from './components/Content'
 import { useSelector } from 'react-redux'
 import { RootState } from './redux/store'
@@ -16,7 +16,7 @@ export const App = (): JSX.Element => {
                 <Menu />
             </section>
             <section>
-                <Articles />
+                <ArticlesList />
             </section>
             <section>
                 <Content />
