@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { sb } from '../api'
+import { sb } from '../lib/api'
 import { AppThunk } from './store'
 
 export interface Content {
