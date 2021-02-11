@@ -64,7 +64,7 @@ function Menu(): JSX.Element {
                         return (
                             <>
                                 <button
-                                    className="pl-4 py-2 bg-gray-200"
+                                    className="pl-4 py-2 bg-gray-50 border-b border-gray-300"
                                     onClick={() => {
                                         toggleExpand(name)
                                     }}
@@ -76,7 +76,7 @@ function Menu(): JSX.Element {
                                         isActive ? 'max-h-full' : 'max-h-0'
                                     } transition-max-height overflow-hidden`}
                                 >
-                                    <div className="py-8 px-6 text-base space-y-4 bg-gray-100 shadow-inner">
+                                    <div className="py-8 px-6 text-base space-y-4 bg-gray-100 shadow-inner border-b border-gray-300">
                                         <MenuComponent />
                                     </div>
                                 </div>
