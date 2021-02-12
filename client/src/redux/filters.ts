@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { sb } from '../lib/api'
+import { fetchArticles } from './articles'
 import { AppThunk } from './store'
 
 export interface NewsSource {
@@ -12,8 +13,8 @@ interface FiltersState {
     status: 'idle' | 'loading' | 'succeeded' | 'failed'
     sources: NewsSource[]
     hiddenSources: string[]
-    rangeMin: number
-    rangeMax: number
+    page: number
+    items: number
 }
 
 const initialFiltersState: FiltersState = {
@@ -21,8 +22,8 @@ const initialFiltersState: FiltersState = {
     status: 'idle',
     sources: [],
     hiddenSources: [],
-    rangeMin: 0,
-    rangeMax: 19,
+    page: 1,
+    items: 10,
 }
 
 export const filtersSlice = createSlice({
@@ -32,8 +33,8 @@ export const filtersSlice = createSlice({
         setFiltersLoading(state) {
             state.status = 'loading'
         },
-        setRangeMax(state, action: PayloadAction<{ rangeMax: number }>) {
-            state.rangeMax = action.payload.rangeMax
+        nextPage(state) {
+            state.page = state.page + 1
         },
         getSourcesSuccess(state, action: PayloadAction<{ sources: NewsSource[] }>) {
             state.status = 'succeeded'
@@ -49,7 +50,7 @@ export const filtersSlice = createSlice({
 
 export const {
     setFiltersLoading,
-    setRangeMax,
+    nextPage,
     getSourcesSuccess,
     getSourcesFail,
 } = filtersSlice.actions
@@ -62,4 +63,9 @@ export const fetchSources = (): AppThunk => async (dispatch) => {
     } catch (err) {
         dispatch(getSourcesFail())
     }
+}
+
+export const loadNextPage = (): AppThunk => async (dispatch) => {
+    dispatch(nextPage())
+    dispatch(fetchArticles())
 }

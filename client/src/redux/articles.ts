@@ -38,7 +38,7 @@ export const articlesSlice = createSlice({
             state.status = 'loading'
         },
         getArticlesSuccess(state, action: PayloadAction<{ result: Article[] }>) {
-            state.items = action.payload.result
+            state.items = [...state.items, ...action.payload.result]
             state.status = 'succeeded'
             state.error = ''
         },
@@ -54,7 +54,6 @@ export const { getArticlesSuccess, getArticlesFailed, setArticlesLoading } = art
 export const fetchArticles = (): AppThunk => async (dispatch, getState) => {
     const { filters } = getState()
     try {
-        dispatch(setArticlesLoading())
         const result = await sb.getArticles(filters)
         dispatch(getArticlesSuccess({ result }))
     } catch (err) {

@@ -16,7 +16,12 @@ class SbHandler {
     private ARTICLE_DATA = 'ArticleData'
     private NEWS_SOURCE = 'NewsSource'
 
-    getArticles = async ({ rangeMin, rangeMax }: RootState['filters']): Promise<Article[]> => {
+    getArticles = async ({ page, items }: RootState['filters']): Promise<Article[]> => {
+        const rangeMin = (page - 1) * items
+        const rangeMax = rangeMin + (items - 1)
+
+        console.log(rangeMin, rangeMax)
+
         const { data, error } = await this.client
             .from(this.ARTICLE_DATA)
             .select(
