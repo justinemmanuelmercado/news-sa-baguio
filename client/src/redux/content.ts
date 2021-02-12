@@ -14,7 +14,7 @@ export interface Content {
     createdAt?: string
     links?: string
     image?: string
-    newsSource: NewsSource
+    newsSource?: NewsSource
 }
 
 interface ContentState {
