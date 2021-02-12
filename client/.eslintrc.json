@@ -7,7 +7,8 @@
         "eslint:recommended",
         "plugin:react/recommended",
         "plugin:@typescript-eslint/recommended",
-        "prettier"
+        "prettier",
+        "plugin:jsx-a11y/strict"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -20,9 +21,11 @@
     "plugins": [
         "react",
         "@typescript-eslint",
-        "prettier"
+        "prettier",
+        "jsx-a11y"
     ],
     "rules": {
+        "jsx-a11y/label-has-for": "off",
         "prettier/prettier": ["error"],
         "linebreak-style": [
             "error",
