@@ -46,8 +46,8 @@ function FilterMenu(): JSX.Element {
     }, [])
     return (
         <>
-            <span>
-                <span className="font-bold uppercase">sources</span>
+            <div>
+                <h2 className="font-bold uppercase">sources</h2>
                 <ul className="pt-4 pl-2">
                     {sources.map((source) => {
                         return (
@@ -66,9 +66,9 @@ function FilterMenu(): JSX.Element {
                         )
                     })}
                 </ul>
-            </span>
+            </div>
             <div>
-                <span className="font-bold uppercase">date</span>
+                <h2 className="font-bold uppercase">date</h2>
                 <span className="flex flex-col pt-4 pl-2 space-y-2">
                     <span className="flex flex-col">
                         <label htmlFor="from">From:</label>

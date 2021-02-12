@@ -11,6 +11,7 @@ import {
 import FilterMenu from './FilterMenu'
 import SearchMenu from './SearchMenu'
 import xor from 'lodash/xor'
+import OptionsMenu from './OptionsMenu'
 
 function MenuLink({
     name,
@@ -43,7 +44,7 @@ function Menu(): JSX.Element {
         },
         {
             name: 'Options',
-            MenuComponent: SearchMenu, //@todo,
+            MenuComponent: OptionsMenu,
             Icon: Settings,
         },
     ]

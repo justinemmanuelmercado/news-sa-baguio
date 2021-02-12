@@ -78,6 +78,7 @@ function Content(): JSX.Element {
                                 <img
                                     className="object-top object-cover rounded-sm"
                                     src={item.image}
+                                    alt={item.description}
                                 ></img>
                             </div>
                         ) : (

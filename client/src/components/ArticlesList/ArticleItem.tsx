@@ -3,6 +3,7 @@ import { Article } from '../../redux/articles'
 import truncate from 'lodash/truncate'
 import { ExternalLink, Link } from 'react-feather'
 import dayjs from 'dayjs'
+import CustomLink from '../CustomLink'
 
 type HandleArticleClick = (id: string) => void
 
@@ -44,6 +45,7 @@ const ArticleItem = ({
                             }`}
                             src={article.image}
                             onLoad={() => handleOnload()}
+                            alt={article.description}
                         ></img>
 
                         <div
@@ -72,22 +74,14 @@ const ArticleItem = ({
                         </div>
                         <h1 className="text-lg font-bold">{title}</h1>
                     </div>
-                    <div
-                        onClick={(evt) => evt.stopPropagation()}
-                        className="bg-gray-200 flex space-x-4 cursor-default px-2 h-8 self-end overflow-hidden"
-                    >
-                        <a
-                            className="underline text-gray-700 flex items-center hover:text-green-100"
-                            href={article.newsSource.homepage}
-                        >
+                    <div className="bg-gray-200 flex space-x-4 px-2 h-8 self-end overflow-hidden">
+                        <CustomLink href={article.newsSource.homepage}>
                             <ExternalLink className="mr-1" size="1rem" /> {article.newsSource.name}
-                        </a>
-                        <a
-                            className="underline text-gray-700 flex items-center hover:text-green-100"
-                            href={article.url}
-                        >
+                        </CustomLink>
+
+                        <CustomLink href={article.url}>
                             <Link className="mr-1" size="1rem" /> Article page
-                        </a>
+                        </CustomLink>
                     </div>
                 </div>
             </button>
