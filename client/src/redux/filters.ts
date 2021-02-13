@@ -99,8 +99,7 @@ export const updateFilters = (
     newFilters: Partial<FiltersState['actualFilters']>,
 ): AppThunk => async (dispatch, getState) => {
     console.log('RUNNING FILTER CHANGE')
-    dispatch(updateActualFilters({ newFilters }))
+    dispatch(updateActualFilters({ newFilters: { ...newFilters, page: 1 } }))
     dispatch(setArticlesLoading())
-    const result = await sb.getArticles(getState().filters.actualFilters)
-    dispatch(getArticlesSuccess({ result }))
+    await debouncedGetArticles(dispatch, getState().filters.actualFilters)
 }

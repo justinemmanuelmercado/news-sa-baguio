@@ -35,7 +35,7 @@ class SbHandler {
             .range(rangeMin, rangeMax)
             .order('increment', { ascending: false })
         if (fromDate) {
-            query = query.gt('createdAt', dayjs(fromDate).subtract(1, 'day').format('YYYY-MM-DD'))
+            query = query.gt('createdAt', dayjs(fromDate).format('YYYY-MM-DD'))
         }
         if (toDate) {
             query = query.lt('createdAt', dayjs(toDate).add(1, 'day').format('YYYY-MM-DD'))
