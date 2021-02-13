@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { fetchSources } from '../../redux/filters'
+import React, { useEffect } from 'react'
+import { fetchSources, updateFilters } from '../../redux/filters'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
 import dayjs from 'dayjs'
+import xor from 'lodash/xor'
 
 function DateInput(
     props: React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
@@ -16,21 +17,26 @@ function DateInput(
 }
 
 function FilterMenu(): JSX.Element {
-    const { sources, hiddenSources } = useSelector((state: RootState) => state.filters)
+    const {
+        sources,
+        actualFilters: { hiddenSources, fromDate, toDate },
+    } = useSelector((state: RootState) => state.filters)
     const dispatch = useDispatch()
-    const [from, setFrom] = useState(dayjs().subtract(7, 'days'))
-    const [to, setTo] = useState(dayjs())
     const dateFormat = 'YYYY-MM-DD'
     const min = '2021-01-01'
     const max = dayjs().format('YYYY-MM-DD')
 
-    const handleDateChange = (evt: React.FormEvent<HTMLInputElement>) => {
+    const handleCheckboxChange = async (sourceId: string) => {
+        dispatch(await updateFilters({ hiddenSources: xor(hiddenSources, [sourceId]) }))
+    }
+    const handleDateChange = async (evt: React.FormEvent<HTMLInputElement>) => {
         switch (evt.currentTarget.id) {
             case 'from':
-                setFrom(dayjs(evt.currentTarget.value))
+                dispatch(await updateFilters({ fromDate: evt.currentTarget.value }))
                 break
             case 'to':
-                setTo(dayjs(evt.currentTarget.value))
+                console.log(evt.currentTarget.value)
+                dispatch(await updateFilters({ toDate: evt.currentTarget.value }))
                 break
             default:
                 return
@@ -39,7 +45,7 @@ function FilterMenu(): JSX.Element {
 
     useEffect(() => {
         const fetchAll = async () => {
-            await dispatch(fetchSources())
+            dispatch(fetchSources())
         }
 
         fetchAll()
@@ -53,6 +59,8 @@ function FilterMenu(): JSX.Element {
                         return (
                             <li key={source.id}>
                                 <input
+                                    onChange={() => handleCheckboxChange(source.id)}
+                                    value={source.name}
                                     checked={!hiddenSources.includes(source.id)}
                                     className="cursor-pointer"
                                     type="checkbox"
@@ -75,10 +83,10 @@ function FilterMenu(): JSX.Element {
                         <DateInput
                             id="from"
                             placeholder={dateFormat}
-                            value={from.format(dateFormat)}
+                            value={fromDate}
                             onChange={handleDateChange}
                             min={min}
-                            max={to.format(dateFormat)}
+                            max={toDate}
                             type="date"
                         />
                     </span>
@@ -86,10 +94,10 @@ function FilterMenu(): JSX.Element {
                         <label htmlFor="to">To:</label>
                         <DateInput
                             id="to"
-                            value={to.format(dateFormat)}
+                            value={toDate}
                             placeholder={dateFormat}
                             onChange={handleDateChange}
-                            min={from.format(dateFormat)}
+                            min={fromDate}
                             max={max}
                             type="date"
                         />

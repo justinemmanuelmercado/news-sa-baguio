@@ -1,4 +1,5 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js'
+import dayjs from 'dayjs'
 import { Article } from '../redux/articles'
 import { Content } from '../redux/content'
 import { NewsSource } from '../redux/filters'
@@ -16,17 +17,31 @@ class SbHandler {
     private ARTICLE_DATA = 'ArticleData'
     private NEWS_SOURCE = 'NewsSource'
 
-    getArticles = async ({ page, items }: { page: number; items: number }): Promise<Article[]> => {
+    getArticles = async ({
+        page,
+        items,
+        hiddenSources,
+        fromDate,
+        toDate,
+    }: RootState['filters']['actualFilters']): Promise<Article[]> => {
         const rangeMin = (page - 1) * items
         const rangeMax = rangeMin + (items - 1)
 
-        const { data, error } = await this.client
+        let query = this.client
             .from(this.ARTICLE_DATA)
             .select(
                 `id, url, links, title, description, image, author, source, published, ttr, createdAt, newsSource:NewsSource ( name, homepage, id ), increment`,
             )
             .range(rangeMin, rangeMax)
             .order('increment', { ascending: false })
+        if (fromDate) {
+            query = query.gt('createdAt', dayjs(fromDate).subtract(1, 'day').format('YYYY-MM-DD'))
+        }
+        if (toDate) {
+            query = query.lt('createdAt', dayjs(toDate).add(1, 'day').format('YYYY-MM-DD'))
+        }
+
+        const { data, error } = await query
 
         if (!error) {
             return data

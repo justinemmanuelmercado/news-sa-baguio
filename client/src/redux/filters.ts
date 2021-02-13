@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import dayjs from 'dayjs'
+import { debounce } from 'lodash'
 import { sb } from '../lib/api'
-import { fetchArticles } from './articles'
+import { fetchMoreArticles, getArticlesSuccess, setArticlesLoading } from './articles'
 import { AppThunk } from './store'
 
 export interface NewsSource {
@@ -12,29 +14,46 @@ interface FiltersState {
     error: string
     status: 'idle' | 'loading' | 'succeeded' | 'failed'
     sources: NewsSource[]
-    hiddenSources: string[]
-    page: number
-    items: number
+    actualFilters: {
+        page: number
+        items: number
+        hiddenSources: string[]
+        fromDate: string
+        toDate: string
+    }
 }
 
 const initialFiltersState: FiltersState = {
     error: '',
     status: 'idle',
     sources: [],
-    hiddenSources: [],
-    page: 1,
-    items: 10,
+    actualFilters: {
+        page: 1,
+        items: 10,
+        hiddenSources: [],
+        fromDate: dayjs().subtract(7, 'days').format('YYYY-MM-DD'),
+        toDate: dayjs().format('YYYY-MM-DD'),
+    },
 }
 
 export const filtersSlice = createSlice({
     name: 'filters',
     initialState: initialFiltersState,
     reducers: {
+        updateActualFilters(
+            state,
+            action: PayloadAction<{ newFilters: Partial<FiltersState['actualFilters']> }>,
+        ) {
+            state.actualFilters = {
+                ...state.actualFilters,
+                ...action.payload.newFilters,
+            }
+        },
         setFiltersLoading(state) {
             state.status = 'loading'
         },
         nextPage(state) {
-            state.page = state.page + 1
+            state.actualFilters.page = state.actualFilters.page + 1
         },
         getSourcesSuccess(state, action: PayloadAction<{ sources: NewsSource[] }>) {
             state.status = 'succeeded'
@@ -49,6 +68,7 @@ export const filtersSlice = createSlice({
 })
 
 export const {
+    updateActualFilters,
     setFiltersLoading,
     nextPage,
     getSourcesSuccess,
@@ -67,5 +87,20 @@ export const fetchSources = (): AppThunk => async (dispatch) => {
 
 export const loadNextPage = (): AppThunk => async (dispatch) => {
     dispatch(nextPage())
-    dispatch(fetchArticles())
+    dispatch(fetchMoreArticles())
+}
+
+const debouncedGetArticles = debounce(async (dispatch, filters) => {
+    const result = await sb.getArticles(filters)
+    dispatch(getArticlesSuccess({ result }))
+}, 500)
+
+export const updateFilters = (
+    newFilters: Partial<FiltersState['actualFilters']>,
+): AppThunk => async (dispatch, getState) => {
+    console.log('RUNNING FILTER CHANGE')
+    dispatch(updateActualFilters({ newFilters }))
+    dispatch(setArticlesLoading())
+    const result = await sb.getArticles(getState().filters.actualFilters)
+    dispatch(getArticlesSuccess({ result }))
 }
