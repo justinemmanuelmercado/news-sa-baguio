@@ -16,19 +16,17 @@ class SbHandler {
     private ARTICLE_DATA = 'ArticleData'
     private NEWS_SOURCE = 'NewsSource'
 
-    getArticles = async ({ page, items }: RootState['filters']): Promise<Article[]> => {
+    getArticles = async ({ page, items }: { page: number; items: number }): Promise<Article[]> => {
         const rangeMin = (page - 1) * items
         const rangeMax = rangeMin + (items - 1)
-
-        console.log(rangeMin, rangeMax)
 
         const { data, error } = await this.client
             .from(this.ARTICLE_DATA)
             .select(
-                `id, url, links, title, description, image, author, source, published, ttr, createdAt, newsSource:NewsSource ( name, homepage, id )`,
+                `id, url, links, title, description, image, author, source, published, ttr, createdAt, newsSource:NewsSource ( name, homepage, id ), increment`,
             )
-            .order('createdAt', { ascending: false })
             .range(rangeMin, rangeMax)
+            .order('increment', { ascending: false })
 
         if (!error) {
             return data

@@ -63,7 +63,7 @@ function Menu(): JSX.Element {
                         const isActive = expandedMenus.indexOf(name) !== -1
 
                         return (
-                            <>
+                            <React.Fragment key={name}>
                                 <button
                                     className="pl-4 py-2 bg-gray-50 border-b border-gray-300"
                                     onClick={() => {
@@ -81,7 +81,7 @@ function Menu(): JSX.Element {
                                         <MenuComponent />
                                     </div>
                                 </div>
-                            </>
+                            </React.Fragment>
                         )
                     })}
                 </div>

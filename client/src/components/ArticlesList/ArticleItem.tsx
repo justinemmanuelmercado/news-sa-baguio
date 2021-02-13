@@ -72,7 +72,10 @@ const ArticleItem = ({
                             </span>
                             <span className="font-light text-gray-600">{createdAtString}</span>
                         </div>
-                        <h1 className="text-lg font-bold">{title}</h1>
+                        <h1
+                            className="text-lg font-bold"
+                            dangerouslySetInnerHTML={{ __html: title }}
+                        />
                     </div>
                     <div className="bg-gray-200 flex space-x-4 px-2 h-8 self-end overflow-hidden">
                         <CustomLink href={article.newsSource.homepage}>

@@ -40,7 +40,6 @@ function ArticlesList(): JSX.Element {
                         panelRef.current.scrollTop + panelRef.current.clientHeight >=
                         panelRef.current.scrollHeight - 200
                     ) {
-                        console.log('DETECTED BOTTOM')
                         await dispatch(loadNextPage())
                     }
                 }, 300),
