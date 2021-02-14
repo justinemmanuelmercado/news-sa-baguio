@@ -1,7 +1,15 @@
 import React from 'react'
 import { AlignJustify, Menu } from 'react-feather'
+import { useSelector, useDispatch } from 'react-redux'
+import { setCompactMode } from '../../redux/options'
+import { RootState } from '../../redux/store'
 
 function OptionsMenu(): JSX.Element {
+    const { compactMode } = useSelector((state: RootState) => state.options)
+    const dispatch = useDispatch()
+    const handleChange = (val: boolean) => {
+        dispatch(setCompactMode({ compactMode: val }))
+    }
     const viewOptions = [
         {
             name: 'expanded',
@@ -29,8 +37,13 @@ function OptionsMenu(): JSX.Element {
                                 >
                                     <input
                                         type="radio"
-                                        name="view"
-                                        value={view.name}
+                                        onChange={() => {
+                                            handleChange(view.name === 'compact')
+                                        }}
+                                        name={view.name}
+                                        checked={
+                                            view.name === 'compact' ? compactMode : !compactMode
+                                        }
                                         id={view.name}
                                     />
                                     <view.Icon size="1.3rem" />
