@@ -4,7 +4,7 @@ import { Search } from 'react-feather'
 function SearchMenu(): JSX.Element {
     return (
         <>
-            <form className="flex flex-row items-center justify-center focus-within:ring-2 focus-within:ring-blue-100 ring-1 ring-gray-900 rounded-sm shadow-sm">
+            <form className="flex flex-row rounded-sm focus-within:ring-2 focus-within:ring-blue-500 text-base text-gray-700 ring-1 ring-gray-300 bg-gray-50">
                 <input
                     className="p-4 rounded-l-sm text-base text-black h-12 w-4/5"
                     type="text"
