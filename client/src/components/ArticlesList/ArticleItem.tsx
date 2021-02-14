@@ -33,12 +33,12 @@ const ArticleItem = ({
         <div>
             <button
                 onClick={() => handleArticleClick(article.id)}
-                className={`bg-gray-100 odd:bg-gray-50 flex flex-row rounded-sm cursor-pointer text-left h-32 hover:text-green-100 border border-gray-300 w-full ${
+                className={`bg-gray-100 odd:bg-gray-50 flex flex-row rounded-sm cursor-pointer text-left max-h-40 min-h-32 hover:text-green-100 border border-gray-300 w-full ${
                     selected ? 'shadow-inner' : 'shadow-lg'
                 }`}
             >
                 {article.image ? (
-                    <div className="w-1/4 h-32 py-1 overflow-hidden rounded-sm">
+                    <div className="w-1/4 h-40 min-h-32 py-1 overflow-hidden rounded-sm">
                         <img
                             className={`object-cover w-full h-full rounded-sm ${
                                 imageDidLoad ? '' : 'hidden'
@@ -61,7 +61,7 @@ const ArticleItem = ({
                     ''
                 )}
                 <div
-                    className={`h-32 pl-4 py-1 flex flex-col justify-between ${
+                    className={`h-40 min-h-32 pl-4 py-1 flex flex-col justify-between ${
                         article.image ? 'w-3/4' : ''
                     } ${selected ? 'border-r-4 border-green-100' : ''}`}
                 >

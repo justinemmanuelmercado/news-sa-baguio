@@ -111,6 +111,9 @@ export abstract class Source {
             const newContent = article.content
                 ? sanitize(article.content, {
                       allowedTags: ALLOWED_TAGS,
+                      allowedAttributes: {
+                          img: ['src'],
+                      },
                       nonTextTags: REMOVE_CONTENT_FROM_TAGS,
                       exclusiveFilter,
                   })
