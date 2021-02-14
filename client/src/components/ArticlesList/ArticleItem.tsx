@@ -77,7 +77,7 @@ const ArticleItem = ({
                             dangerouslySetInnerHTML={{ __html: title }}
                         />
                     </div>
-                    <div className="bg-gray-200 flex space-x-4 px-2 h-8 self-end overflow-hidden">
+                    <div className="bg-gray-300 flex space-x-4 px-2 h-8 self-end overflow-hidden">
                         <CustomLink href={article.newsSourceObject.homepage}>
                             <ExternalLink className="mr-1" size="1rem" />{' '}
                             {article.newsSourceObject.name}
