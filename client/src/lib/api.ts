@@ -23,6 +23,7 @@ class SbHandler {
         shownSources,
         fromDate,
         toDate,
+        search,
     }: RootState['filters']['actualFilters']): Promise<Article[]> => {
         const rangeMin = (page - 1) * items
         const rangeMax = rangeMin + (items - 1)
@@ -42,6 +43,10 @@ class SbHandler {
         }
         if (shownSources.length !== 0) {
             query = query.in('newsSource', shownSources)
+        }
+
+        if (search) {
+            query = query.ilike('content', `%${search}%`)
         }
 
         const { data, error } = await query

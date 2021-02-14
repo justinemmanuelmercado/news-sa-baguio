@@ -20,6 +20,7 @@ interface FiltersState {
         shownSources: string[]
         fromDate: string
         toDate: string
+        search: string
     }
 }
 
@@ -33,6 +34,7 @@ const initialFiltersState: FiltersState = {
         shownSources: [],
         fromDate: dayjs().subtract(7, 'days').format('YYYY-MM-DD'),
         toDate: dayjs().format('YYYY-MM-DD'),
+        search: '',
     },
 }
 
