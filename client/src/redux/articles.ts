@@ -15,7 +15,7 @@ export interface Article {
     published?: string
     ttr?: number
     createdAt?: string
-    newsSource: NewsSource
+    newsSourceObject: NewsSource
 }
 
 interface ArticlesState {

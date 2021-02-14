@@ -17,7 +17,7 @@ interface FiltersState {
     actualFilters: {
         page: number
         items: number
-        hiddenSources: string[]
+        shownSources: string[]
         fromDate: string
         toDate: string
     }
@@ -30,7 +30,7 @@ const initialFiltersState: FiltersState = {
     actualFilters: {
         page: 1,
         items: 10,
-        hiddenSources: [],
+        shownSources: [],
         fromDate: dayjs().subtract(7, 'days').format('YYYY-MM-DD'),
         toDate: dayjs().format('YYYY-MM-DD'),
     },
@@ -58,6 +58,7 @@ export const filtersSlice = createSlice({
         getSourcesSuccess(state, action: PayloadAction<{ sources: NewsSource[] }>) {
             state.status = 'succeeded'
             state.sources = action.payload.sources
+            state.actualFilters.shownSources = action.payload.sources.map((src) => src.id)
             state.error = ''
         },
         getSourcesFail(state) {

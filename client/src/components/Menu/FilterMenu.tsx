@@ -19,7 +19,7 @@ function DateInput(
 function FilterMenu(): JSX.Element {
     const {
         sources,
-        actualFilters: { hiddenSources, fromDate, toDate },
+        actualFilters: { shownSources, fromDate, toDate },
     } = useSelector((state: RootState) => state.filters)
     const dispatch = useDispatch()
     const dateFormat = 'YYYY-MM-DD'
@@ -27,7 +27,7 @@ function FilterMenu(): JSX.Element {
     const max = dayjs().format('YYYY-MM-DD')
 
     const handleCheckboxChange = async (sourceId: string) => {
-        dispatch(await updateFilters({ hiddenSources: xor(hiddenSources, [sourceId]) }))
+        dispatch(await updateFilters({ shownSources: xor(shownSources, [sourceId]) }))
     }
     const handleDateChange = async (evt: React.FormEvent<HTMLInputElement>) => {
         switch (evt.currentTarget.id) {
@@ -61,7 +61,7 @@ function FilterMenu(): JSX.Element {
                                 <input
                                     onChange={() => handleCheckboxChange(source.id)}
                                     value={source.name}
-                                    checked={!hiddenSources.includes(source.id)}
+                                    checked={shownSources.includes(source.id)}
                                     className="cursor-pointer"
                                     type="checkbox"
                                     name={source.name}

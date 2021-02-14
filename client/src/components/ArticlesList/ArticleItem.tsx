@@ -68,7 +68,7 @@ const ArticleItem = ({
                     <div>
                         <div className="space-x-4">
                             <span className="text-black">
-                                {article.author ? article.author : article.newsSource.name}
+                                {article.author ? article.author : article.newsSourceObject.name}
                             </span>
                             <span className="font-light text-gray-600">{createdAtString}</span>
                         </div>
@@ -78,8 +78,9 @@ const ArticleItem = ({
                         />
                     </div>
                     <div className="bg-gray-200 flex space-x-4 px-2 h-8 self-end overflow-hidden">
-                        <CustomLink href={article.newsSource.homepage}>
-                            <ExternalLink className="mr-1" size="1rem" /> {article.newsSource.name}
+                        <CustomLink href={article.newsSourceObject.homepage}>
+                            <ExternalLink className="mr-1" size="1rem" />{' '}
+                            {article.newsSourceObject.name}
                         </CustomLink>
 
                         <CustomLink href={article.url}>

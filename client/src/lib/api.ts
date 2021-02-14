@@ -20,7 +20,7 @@ class SbHandler {
     getArticles = async ({
         page,
         items,
-        hiddenSources,
+        shownSources,
         fromDate,
         toDate,
     }: RootState['filters']['actualFilters']): Promise<Article[]> => {
@@ -30,15 +30,18 @@ class SbHandler {
         let query = this.client
             .from(this.ARTICLE_DATA)
             .select(
-                `id, url, links, title, description, image, author, source, published, ttr, createdAt, newsSource:NewsSource ( name, homepage, id ), increment`,
+                `id, url, links, title, description, image, author, source, published, ttr, createdAt, newsSourceObject:NewsSource ( name, homepage, id ), increment, newsSource`,
             )
             .range(rangeMin, rangeMax)
             .order('increment', { ascending: false })
         if (fromDate) {
-            query = query.gt('createdAt', dayjs(fromDate).format('YYYY-MM-DD'))
+            query = query.gt('createdAt', fromDate)
         }
         if (toDate) {
             query = query.lt('createdAt', dayjs(toDate).add(1, 'day').format('YYYY-MM-DD'))
+        }
+        if (shownSources.length !== 0) {
+            query = query.in('newsSource', shownSources)
         }
 
         const { data, error } = await query
