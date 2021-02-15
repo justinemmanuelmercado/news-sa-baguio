@@ -1,9 +1,10 @@
 import React, { useMemo } from 'react'
-import { ExternalLink, Link } from 'react-feather'
-import { useSelector } from 'react-redux'
+import { ChevronsLeft, ChevronsRight, ChevronsUp, ExternalLink, Link } from 'react-feather'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../redux/store'
 import dayjs from 'dayjs'
 import truncate from 'lodash/truncate'
+import { setCompact } from '../redux/content'
 
 const BlankBar = () => <div className="h-4 bg-gray-200 rounded"></div>
 
@@ -49,7 +50,8 @@ function Blank({ isLoading }: { isLoading: boolean }): JSX.Element {
 }
 
 function Content(): JSX.Element {
-    const { item, status } = useSelector((state: RootState) => state.content)
+    const { item, status, compact } = useSelector((state: RootState) => state.content)
+    const dispatch = useDispatch()
     const createdAtString = useMemo(() => {
         if (!item?.createdAt) {
             return ''
@@ -57,6 +59,10 @@ function Content(): JSX.Element {
             return dayjs(item.createdAt).format('MMMM DD, YYYY')
         }
     }, [item])
+
+    const handleToggleCompact = () => {
+        dispatch(setCompact({ compact: !compact }))
+    }
 
     const articleUrl = useMemo(() => {
         if (!item?.url) {
@@ -68,6 +74,12 @@ function Content(): JSX.Element {
 
     return (
         <div className="overflow-y-auto h-screen">
+            <button
+                onClick={handleToggleCompact}
+                className="fixed p-3 rounded-full bg-gray-50 shadow-lg wwl m-2 text-gray-500 flex items-center justify-center"
+            >
+                {compact ? <ChevronsLeft /> : <ChevronsRight />}
+            </button>
             {status === 'idle' && <Blank isLoading={false} />}
             {status === 'loading' && <Blank isLoading={true} />}
             {status === 'succeeded' && (
