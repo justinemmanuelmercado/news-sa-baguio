@@ -1,6 +1,9 @@
 // tailwind.config.js
 /* eslint-env node */
 module.exports = {
+    purge: {
+        content: ['./src/**/*.tsx'],
+    },
     plugins: [require('@tailwindcss/typography')],
     theme: {
         gridTemplateColumns: {
