@@ -1,17 +1,8 @@
 import React, { useState } from 'react'
-import {
-    Filter,
-    Settings,
-    IconProps,
-    Search,
-    ChevronsLeft,
-    ChevronsUp,
-    ChevronsDown,
-} from 'react-feather'
+import { Filter, IconProps, Search, ChevronsLeft, ChevronsUp, ChevronsDown } from 'react-feather'
 import FilterMenu from './FilterMenu'
 import SearchMenu from './SearchMenu'
 import xor from 'lodash/xor'
-import OptionsMenu from './OptionsMenu'
 
 function MenuLink({
     name,
@@ -41,11 +32,6 @@ function Menu(): JSX.Element {
             name: 'Search',
             MenuComponent: SearchMenu,
             Icon: Search,
-        },
-        {
-            name: 'Options',
-            MenuComponent: OptionsMenu,
-            Icon: Settings,
         },
     ]
     const [expandedMenus, setExpandedMenus] = useState<string[]>(['Filter', 'Search', 'Options'])

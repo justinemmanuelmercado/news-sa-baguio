@@ -9,14 +9,14 @@ import debounce from 'lodash/debounce'
 
 const LoadingArticle = () => {
     return (
-        <div className="animate-pulse bg-gray-100 odd:bg-gray-50 flex flex-row rounded-sm shadow-lg text-left max-h-40 min-h-32 hover:text-green-100 border border-gray-300 w-full">
-            <div className="w-1/4 max-h-40 min-h-32 overflow-hidden rounded-sm p-1">
+        <div className="animate-pulse bg-gray-100 odd:bg-gray-50 flex flex-row rounded-sm shadow-lg text-left h-40 min-h-32 hover:text-green-100 border border-gray-300 w-full">
+            <div className="w-1/4 h-40 min-h-32 overflow-hidden rounded-sm p-1">
                 <div className="bg-gray-200 w-full h-full flex items-center justify-center ">
                     <div className="h-5 w-5 bg-gray-100 rounded-full" />
                     <div className="bg-white w-8 h-8 rounded-full"></div>
                 </div>
             </div>
-            <div className="w-3/4 px-6 py-6 space-y-2 max-h-40 min-h-32">
+            <div className="w-3/4 px-6 py-6 space-y-2 h-40 min-h-32">
                 <div className="h-4 bg-gray-200 rounded"></div>
                 <div className="h-4 bg-gray-200 rounded"></div>
                 <div className="h-4 bg-gray-200 rounded"></div>
