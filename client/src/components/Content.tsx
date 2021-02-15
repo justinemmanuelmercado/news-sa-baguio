@@ -73,62 +73,65 @@ function Content(): JSX.Element {
     }, [item])
 
     return (
-        <div className="overflow-y-auto h-screen">
+        <>
+            {' '}
             <button
                 onClick={handleToggleCompact}
-                className="fixed p-3 rounded-full bg-gray-50 shadow-lg wwl m-2 text-gray-500 flex items-center justify-center"
+                className="fixed p-3 rounded-full border border-gray-500 bg-gray-50 animate-none shadow-xl wwl m-2 text-gray-500 flex items-center justify-center"
             >
                 {compact ? <ChevronsLeft /> : <ChevronsRight />}
             </button>
-            {status === 'idle' && <Blank isLoading={false} />}
-            {status === 'loading' && <Blank isLoading={true} />}
-            {status === 'succeeded' && (
-                <article>
-                    <div>
-                        {item.image ? (
-                            <div className="w-full border-b-8 border-gray-200 rounded-sm h-96 overflow-hidden ">
-                                <img
-                                    className="object-top object-cover rounded-sm"
-                                    src={item.image}
-                                    alt={item.description}
-                                ></img>
+            <div className="overflow-y-auto h-screen">
+                {status === 'loading' && <Blank isLoading={true} />}
+                {status === 'idle' && <Blank isLoading={false} />}
+                {status === 'succeeded' && (
+                    <article>
+                        <div>
+                            {item.image ? (
+                                <div className="w-full border-b-8 border-gray-200 rounded-sm h-96 overflow-hidden ">
+                                    <img
+                                        className="object-top object-cover rounded-sm"
+                                        src={item.image}
+                                        alt={item.description}
+                                    ></img>
+                                </div>
+                            ) : (
+                                ''
+                            )}
+                            <div className="p-8 flex flex-col justify-between space-y-2">
+                                <div className="flex space-x-4 cursor-default">
+                                    <a
+                                        className="underline text-gray-700 flex items-center hover:text-green-100"
+                                        href={item.newsSource.homepage}
+                                    >
+                                        <ExternalLink className="mr-1" size="1rem" />{' '}
+                                        {item.newsSource.name}
+                                    </a>
+                                    <a
+                                        className="underline text-gray-700 flex items-center hover:text-green-100"
+                                        href={item.url}
+                                    >
+                                        <Link className="mr-1" size="1rem" /> {articleUrl}
+                                    </a>
+                                    <span>{createdAtString}</span>
+                                </div>
+                                <h1 className="font-black text-black text-4xl">{item.title}</h1>
                             </div>
-                        ) : (
-                            ''
-                        )}
-                        <div className="p-8 flex flex-col justify-between space-y-2">
-                            <div className="flex space-x-4 cursor-default">
-                                <a
-                                    className="underline text-gray-700 flex items-center hover:text-green-100"
-                                    href={item.newsSource.homepage}
-                                >
-                                    <ExternalLink className="mr-1" size="1rem" />{' '}
-                                    {item.newsSource.name}
-                                </a>
-                                <a
-                                    className="underline text-gray-700 flex items-center hover:text-green-100"
-                                    href={item.url}
-                                >
-                                    <Link className="mr-1" size="1rem" /> {articleUrl}
-                                </a>
-                                <span>{createdAtString}</span>
+                        </div>
+                        <div className="bg-gray-100 w-full p-4 border">
+                            <div className="py-12 px-6 bg-gray-50 border shadow-xl">
+                                <div
+                                    className="prose-lg"
+                                    dangerouslySetInnerHTML={{
+                                        __html: item.body,
+                                    }}
+                                ></div>
                             </div>
-                            <h1 className="font-black text-black text-4xl">{item.title}</h1>
                         </div>
-                    </div>
-                    <div className="bg-gray-100 w-full p-4 border">
-                        <div className="py-12 px-6 bg-gray-50 border shadow-xl">
-                            <div
-                                className="prose-lg"
-                                dangerouslySetInnerHTML={{
-                                    __html: item.body,
-                                }}
-                            ></div>
-                        </div>
-                    </div>
-                </article>
-            )}
-        </div>
+                    </article>
+                )}
+            </div>
+        </>
     )
 }
 
