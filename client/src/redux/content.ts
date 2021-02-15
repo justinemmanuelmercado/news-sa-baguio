@@ -19,12 +19,14 @@ export interface Content {
 
 interface ContentState {
     item: Content | null
+    compact: boolean
     status: 'idle' | 'loading' | 'succeeded' | 'failed'
     error: string
 }
 
 const initialContentState: ContentState = {
     item: null,
+    compact: true,
     error: '',
     status: 'idle',
 }
@@ -38,6 +40,9 @@ export const contentSlice = createSlice({
          * articles list to identify
          * which article is selected
          */
+        setCompact(state, action: PayloadAction<{ compact: boolean }>) {
+            state.compact = action.payload.compact
+        },
         setContentId(state, action: PayloadAction<{ id: string }>) {
             state.item = { id: action.payload.id }
         },
@@ -57,6 +62,7 @@ export const contentSlice = createSlice({
 })
 
 export const {
+    setCompact,
     getContentSuccess,
     getContentFailed,
     setContentLoading,
@@ -66,6 +72,7 @@ export const {
 export const fetchContent = (id: string): AppThunk => async (dispatch) => {
     dispatch(setContentId({ id }))
     try {
+        dispatch(setCompact({ compact: false }))
         dispatch(setContentLoading())
         const result = await sb.getArticleContent(id)
         dispatch(getContentSuccess({ result }))

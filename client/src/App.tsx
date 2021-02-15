@@ -6,9 +6,8 @@ import { useSelector } from 'react-redux'
 import { RootState } from './redux/store'
 
 export const App = (): JSX.Element => {
-    const { status: contentStatus } = useSelector((state: RootState) => state.content)
-    const currentGridSetup =
-        contentStatus === 'idle' ? 'grid-cols-main-list' : 'grid-cols-main-content'
+    const { compact } = useSelector((state: RootState) => state.content)
+    const currentGridSetup = compact ? 'grid-cols-main-list' : 'grid-cols-main-content'
 
     return (
         <div className={`w-screen h-screen grid gap-0 transition-grid-cols ${currentGridSetup}`}>
