@@ -19,6 +19,7 @@ function DateInput(
 function FilterMenu(): JSX.Element {
     const {
         sources,
+        status,
         actualFilters: { shownSources, fromDate, toDate },
     } = useSelector((state: RootState) => state.filters)
     const dispatch = useDispatch()
@@ -55,24 +56,42 @@ function FilterMenu(): JSX.Element {
             <div>
                 <h2 className="font-bold uppercase">sources</h2>
                 <ul className="pt-4 pl-2">
-                    {sources.map((source) => {
-                        return (
-                            <li key={source.id}>
-                                <input
-                                    onChange={() => handleCheckboxChange(source.id)}
-                                    value={source.name}
-                                    checked={shownSources.includes(source.id)}
-                                    className="cursor-pointer"
-                                    type="checkbox"
-                                    name={source.name}
-                                    id={source.name}
-                                />{' '}
-                                <label className="cursor-pointer" htmlFor={source.name}>
-                                    {source.name}
-                                </label>
+                    {status === 'loading' && (
+                        <div className="space-y-4">
+                            <li>
+                                <div className="h-2 animate-pulse bg-gray-200 rounded"></div>
                             </li>
-                        )
-                    })}
+                            <li>
+                                <div className="h-2 animate-pulse bg-gray-200 rounded"></div>
+                            </li>
+                            <li>
+                                <div className="h-2 animate-pulse bg-gray-200 rounded"></div>
+                            </li>
+                            <li>
+                                <div className="h-2 animate-pulse bg-gray-200 rounded"></div>
+                            </li>
+                        </div>
+                    )}
+
+                    {status === 'succeeded' &&
+                        sources.map((source) => {
+                            return (
+                                <li key={source.id}>
+                                    <input
+                                        onChange={() => handleCheckboxChange(source.id)}
+                                        value={source.name}
+                                        checked={shownSources.includes(source.id)}
+                                        className="cursor-pointer"
+                                        type="checkbox"
+                                        name={source.name}
+                                        id={source.name}
+                                    />{' '}
+                                    <label className="cursor-pointer" htmlFor={source.name}>
+                                        {source.name}
+                                    </label>
+                                </li>
+                            )
+                        })}
                 </ul>
             </div>
             <div>

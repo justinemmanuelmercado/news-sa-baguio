@@ -72,9 +72,6 @@ function Menu(): JSX.Element {
                     })}
                 </div>
             </div>
-            <button className="pl-4 flex flex-row items-center space-x-2 py-4 bg-gray-200 justify-start hover:bg-gray-100 shadow-xl">
-                <ChevronsLeft /> <span>Hide Menu</span>
-            </button>
         </div>
     )
 }
