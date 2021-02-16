@@ -7,10 +7,12 @@ import { RootState } from './redux/store'
 
 export const App = (): JSX.Element => {
     const { compact } = useSelector((state: RootState) => state.content)
-    const currentGridSetup = compact ? 'grid-cols-main-list' : 'grid-cols-main-content'
+    const currentGridSetup = compact
+        ? 'grid-cols-mobile-main-list lg:grid-cols-main-list'
+        : 'grid-cols-mobile-main-content lg:grid-cols-main-content'
 
     return (
-        <div className={`w-screen h-screen grid gap-0 transition-grid-cols ${currentGridSetup}`}>
+        <div className={`w-screen h-screen grid gap-0 transition-grid-cols  ${currentGridSetup}`}>
             <section className="h-full">
                 <Menu />
             </section>

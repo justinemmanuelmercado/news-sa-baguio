@@ -73,7 +73,7 @@ function Content(): JSX.Element {
     }, [item])
 
     return (
-        <>
+        <div>
             {' '}
             <button
                 onClick={handleToggleCompact}
@@ -88,9 +88,9 @@ function Content(): JSX.Element {
                     <article>
                         <div>
                             {item.image ? (
-                                <div className="w-full border-b-8 border-gray-200 rounded-sm h-96 overflow-hidden ">
+                                <div className="border-b-8 border-gray-200 rounded-sm h-96 overflow-hidden ">
                                     <img
-                                        className="object-top object-cover rounded-sm"
+                                        className="w-full h-full object-cover rounded-sm"
                                         src={item.image}
                                         alt={item.description}
                                     ></img>
@@ -98,8 +98,9 @@ function Content(): JSX.Element {
                             ) : (
                                 ''
                             )}
-                            <div className="p-8 flex flex-col justify-between space-y-2">
-                                <div className="flex space-x-4 cursor-default">
+                            <div className="p-8 flex flex-col justify-between space-y-2 w-full">
+                                <h1 className="font-black text-black text-4xl">{item.title}</h1>
+                                <div className="flex md:flex-row flex-col space-y-2 lg:space-y-0 lg:space-x-4 cursor-default">
                                     <a
                                         className="underline text-gray-700 flex items-center hover:text-green-100"
                                         href={item.newsSource.homepage}
@@ -115,7 +116,6 @@ function Content(): JSX.Element {
                                     </a>
                                     <span>{createdAtString}</span>
                                 </div>
-                                <h1 className="font-black text-black text-4xl">{item.title}</h1>
                             </div>
                         </div>
                         <div className="bg-gray-100 w-full p-4 border">
@@ -131,7 +131,7 @@ function Content(): JSX.Element {
                     </article>
                 )}
             </div>
-        </>
+        </div>
     )
 }
 
