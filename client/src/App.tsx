@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Menu from './components/Menu/Menu'
 import ArticlesList from './components/ArticlesList/ArticlesList'
 import Content from './components/Content'
@@ -10,10 +10,19 @@ export const App = (): JSX.Element => {
     const currentGridSetup = compact
         ? 'grid-cols-mobile-main-list lg:grid-cols-main-list'
         : 'grid-cols-mobile-main-content lg:grid-cols-main-content'
+    const [menuExpanded, setMenuExpanded] = useState<boolean>(false)
 
     return (
         <div className={`w-screen h-screen grid gap-0 transition-grid-cols  ${currentGridSetup}`}>
-            <section className="h-full">
+            <section
+                className={`h-full fixed ${menuExpanded ? 'w-3/4' : 'w-0'} lg:w-60 lg:relative`}
+            >
+                <button
+                    className="fixed m-2 top-10 left-10 p-4 bg-green-100"
+                    onClick={() => setMenuExpanded(!menuExpanded)}
+                >
+                    EXPAND MENU
+                </button>
                 <Menu />
             </section>
             <section>

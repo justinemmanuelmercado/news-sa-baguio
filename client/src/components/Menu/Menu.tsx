@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Filter, IconProps, Search, ChevronsLeft, ChevronsUp, ChevronsDown } from 'react-feather'
+import { Filter, IconProps, Search, ChevronsUp, ChevronsDown } from 'react-feather'
 import FilterMenu from './FilterMenu'
 import SearchMenu from './SearchMenu'
 import xor from 'lodash/xor'

@@ -9,8 +9,8 @@ module.exports = {
         gridTemplateColumns: {
             'main-list': '15rem 1.2fr 0.8fr',
             'main-content': '15rem 0.8fr 1.2fr',
-            'mobile-main-content': '0 0vw 100vw',
-            'mobile-main-list': '0 100vw 0vw',
+            'mobile-main-content': '0vw 100vw',
+            'mobile-main-list': '100vw 0vw',
         },
         transitionProperty: {
             'max-height': 'max-height',

@@ -97,7 +97,7 @@ function Content(): JSX.Element {
                                     ></img>
                                 </div>
                             ) : (
-                                ''
+                                <div className="h-96 bg-gray-200"></div>
                             )}
                             <div className="p-8 flex flex-col justify-between space-y-2 w-full">
                                 <h1 className="font-black text-black text-4xl">{item.title}</h1>
