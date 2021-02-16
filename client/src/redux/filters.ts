@@ -101,7 +101,6 @@ const debouncedGetArticles = debounce(async (dispatch, filters) => {
 export const updateFilters = (
     newFilters: Partial<FiltersState['actualFilters']>,
 ): AppThunk => async (dispatch, getState) => {
-    console.log('RUNNING FILTER CHANGE')
     dispatch(updateActualFilters({ newFilters: { ...newFilters, page: 1 } }))
     dispatch(setArticlesLoading())
     await debouncedGetArticles(dispatch, getState().filters.actualFilters)

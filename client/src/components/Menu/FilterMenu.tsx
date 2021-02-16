@@ -36,7 +36,6 @@ function FilterMenu(): JSX.Element {
                 dispatch(await updateFilters({ fromDate: evt.currentTarget.value }))
                 break
             case 'to':
-                console.log(evt.currentTarget.value)
                 dispatch(await updateFilters({ toDate: evt.currentTarget.value }))
                 break
             default:
