@@ -37,6 +37,7 @@ function SearchMenu(): JSX.Element {
                 />
                 <button
                     type="submit"
+                    aria-label="Search"
                     className="w-1/5 bg-gray-400 h-12 rounded-r-sm flex justify-center items-center"
                 >
                     <Search size="1.2rem" />

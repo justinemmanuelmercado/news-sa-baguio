@@ -76,6 +76,7 @@ function Content(): JSX.Element {
         <div>
             {' '}
             <button
+                aria-label="hide or show content"
                 onClick={handleToggleCompact}
                 className="fixed p-3 rounded-full border border-gray-500 bg-gray-50 animate-none shadow-xl wwl m-2 text-gray-500 flex items-center justify-center"
             >

@@ -32,6 +32,7 @@ const ArticleItem = ({
     return (
         <div>
             <button
+                aria-label={`Read article: ${article.title}`}
                 onClick={() => handleArticleClick(article.id)}
                 className={`bg-gray-100 odd:bg-gray-50 flex flex-row rounded-sm cursor-pointer text-left max-h-40 min-h-32 hover:text-green-100 border border-gray-300 w-full ${
                     selected ? 'shadow-inner' : 'shadow-lg'
