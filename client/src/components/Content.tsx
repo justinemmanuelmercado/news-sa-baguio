@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { ChevronsLeft, ChevronsRight, ChevronsUp, ExternalLink, Link } from 'react-feather'
+import { ChevronsLeft, ChevronsRight, ExternalLink, Link } from 'react-feather'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../redux/store'
 import dayjs from 'dayjs'
@@ -82,7 +82,7 @@ function Content(): JSX.Element {
             >
                 {compact ? <ChevronsLeft /> : <ChevronsRight />}
             </button>
-            <div className="overflow-y-auto h-screen">
+            <div>
                 {status === 'loading' && <Blank isLoading={true} />}
                 {status === 'idle' && <Blank isLoading={false} />}
                 {status === 'succeeded' && (

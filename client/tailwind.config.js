@@ -6,6 +6,9 @@ module.exports = {
     },
     plugins: [require('@tailwindcss/typography')],
     theme: {
+        gridTemplateRows: {
+            app: 'max-content 1fr',
+        },
         gridTemplateColumns: {
             'main-list': '15rem 1.2fr 0.8fr',
             'main-content': '15rem 0.8fr 1.2fr',

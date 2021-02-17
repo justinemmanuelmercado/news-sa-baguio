@@ -42,7 +42,7 @@ function Menu(): JSX.Element {
     }
 
     return (
-        <div className="h-screen bg-gray-50 text-black flex flex-col shadow-2xl">
+        <div className=" bg-gray-50 text-black flex flex-col shadow-2xl">
             <div className="flex flex-col justify-between flex-grow overflow-y-auto">
                 <div className="flex flex-col">
                     {menus.map(({ name, MenuComponent, Icon }) => {
