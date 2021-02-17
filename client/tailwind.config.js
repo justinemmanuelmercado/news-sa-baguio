@@ -18,6 +18,7 @@ module.exports = {
         transitionProperty: {
             'max-height': 'max-height',
             'grid-cols': 'grid-template-columns',
+            width: 'width',
         },
         colors: {
             transparent: 'transparent',

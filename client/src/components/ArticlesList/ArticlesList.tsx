@@ -58,7 +58,7 @@ function ArticlesList(): JSX.Element {
     }
 
     return (
-        <div ref={panelRef} className="bg-white">
+        <div ref={panelRef} className="bg-white h-full overflow-y-scroll">
             <div className="space-y-4 p-4">
                 {status === 'loading' ? (
                     <>
