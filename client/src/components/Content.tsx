@@ -83,7 +83,7 @@ function Content(): JSX.Element {
                 {compact ? <ChevronsLeft /> : <ChevronsRight />}
             </button>
             <div>
-                {status === status && <Blank isLoading={true} />}
+                {status === 'loading' && <Blank isLoading={true} />}
                 {status === 'idle' && <Blank isLoading={false} />}
                 {status === 'succeeded' && (
                     <article>
