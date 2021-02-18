@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchArticles, setArticlesLoading } from '../../redux/articles'
+import { Article } from '../../redux/articles'
 import { RootState } from '../../redux/store'
 import { fetchContent } from '../../redux/content'
-import { loadNextPage } from '../../redux/filters'
 import ArticleItem from './ArticleItem'
 import debounce from 'lodash/debounce'
+import { FetchNextPageOptions, InfiniteData, InfiniteQueryObserverResult } from 'react-query'
 
 const LoadingArticle = () => {
     return (
@@ -26,9 +26,18 @@ const LoadingArticle = () => {
     )
 }
 
-function ArticlesList(): JSX.Element {
+function ArticlesList({
+    articles,
+    status,
+    fetchNextPage,
+}: {
+    articles: InfiniteData<Article[]>
+    status: string
+    fetchNextPage: (
+        options?: FetchNextPageOptions,
+    ) => Promise<InfiniteQueryObserverResult<Article[], unknown>>
+}): JSX.Element {
     const dispatch = useDispatch()
-    const { items, status } = useSelector((state: RootState) => state.articles)
     const { item } = useSelector((state: RootState) => state.content)
     const panelRef = useRef<HTMLDivElement>(null)
     const attachScrollRef = () => {
@@ -40,7 +49,7 @@ function ArticlesList(): JSX.Element {
                         panelRef.current.scrollTop + panelRef.current.clientHeight >=
                         panelRef.current.scrollHeight - 200
                     ) {
-                        await dispatch(loadNextPage())
+                        fetchNextPage()
                     }
                 }, 300),
             )
@@ -48,8 +57,6 @@ function ArticlesList(): JSX.Element {
     }
 
     useEffect(() => {
-        dispatch(setArticlesLoading())
-        dispatch(fetchArticles())
         attachScrollRef()
     }, [])
 
@@ -66,14 +73,20 @@ function ArticlesList(): JSX.Element {
                         <LoadingArticle />
                     </>
                 ) : (
-                    items.map((article) => {
+                    articles.pages.map((articlePage, i) => {
                         return (
-                            <ArticleItem
-                                selected={item?.id === article.id}
-                                handleArticleClick={handleArticleClick}
-                                article={article}
-                                key={article.id}
-                            />
+                            <React.Fragment key={i}>
+                                {articlePage.map((article) => {
+                                    return (
+                                        <ArticleItem
+                                            selected={item?.id === article.id}
+                                            handleArticleClick={handleArticleClick}
+                                            article={article}
+                                            key={article.id}
+                                        />
+                                    )
+                                })}
+                            </React.Fragment>
                         )
                     })
                 )}

@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
-import { fetchSources, updateFilters } from '../../redux/filters'
+import { fetchSources } from '../../redux/filters'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
 import dayjs from 'dayjs'
 import xor from 'lodash/xor'
+import { Filters } from '../../App'
 
 function DateInput(
     props: React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
@@ -16,27 +17,34 @@ function DateInput(
     )
 }
 
-function FilterMenu(): JSX.Element {
-    const {
-        sources,
-        status,
-        actualFilters: { shownSources, fromDate, toDate },
-    } = useSelector((state: RootState) => state.filters)
+function FilterMenu({
+    filters,
+    setFilters,
+}: {
+    filters: Filters
+    setFilters: (f: Filters) => void
+}): JSX.Element {
+    const { shownSources, fromDate, toDate } = filters
+    const { sources, status } = useSelector((state: RootState) => state.filters)
     const dispatch = useDispatch()
     const dateFormat = 'YYYY-MM-DD'
     const min = '2021-01-01'
     const max = dayjs().format('YYYY-MM-DD')
 
-    const handleCheckboxChange = async (sourceId: string) => {
-        dispatch(await updateFilters({ shownSources: xor(shownSources, [sourceId]) }))
+    const handleFilterChange = (newFilters: Partial<Filters>): void => {
+        setFilters({ ...filters, ...newFilters })
     }
-    const handleDateChange = async (evt: React.FormEvent<HTMLInputElement>) => {
+
+    const handleCheckboxChange = async (sourceId: string) => {
+        handleFilterChange({ shownSources: xor(shownSources, [sourceId]) })
+    }
+    const handleDateChange = (evt: React.FormEvent<HTMLInputElement>) => {
         switch (evt.currentTarget.id) {
             case 'from':
-                dispatch(await updateFilters({ fromDate: evt.currentTarget.value }))
+                handleFilterChange({ fromDate: evt.currentTarget.value })
                 break
             case 'to':
-                dispatch(await updateFilters({ toDate: evt.currentTarget.value }))
+                handleFilterChange({ toDate: evt.currentTarget.value })
                 break
             default:
                 return

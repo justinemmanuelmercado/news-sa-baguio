@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
 import { Search } from 'react-feather'
-import { useSelector, useDispatch } from 'react-redux'
-import { updateFilters } from '../../redux/filters'
-import { RootState } from '../../redux/store'
+import { Filters } from '../../App'
 
-function SearchMenu(): JSX.Element {
-    const dispatch = useDispatch()
-    const {
-        actualFilters: { search },
-    } = useSelector((state: RootState) => state.filters)
+function SearchMenu({
+    filters,
+    setFilters,
+}: {
+    filters: Filters
+    setFilters: (f: Filters) => void
+}): JSX.Element {
+    const { search } = filters
     const [searchQuery, setSearchQuery] = useState<string>(search)
 
     const handleChange = (evt: React.FormEvent<HTMLInputElement>) => {
@@ -17,7 +18,7 @@ function SearchMenu(): JSX.Element {
 
     const handleSearch = (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault()
-        dispatch(updateFilters({ search: searchQuery }))
+        setFilters({ ...filters, search: searchQuery })
     }
 
     return (

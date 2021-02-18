@@ -55,7 +55,7 @@ class SbHandler {
             return data
         } else {
             console.log(error.message)
-            throw new Error()
+            throw new Error('Failed to load articles')
         }
     }
 
