@@ -77,6 +77,7 @@ export const App = (): JSX.Element => {
                         <MenuLayout
                             Icon={Filter}
                             toggleExpand={toggleExpand}
+                            name="Filters"
                             isActive={expandedMenus.indexOf('Filter') !== -1}
                         >
                             <FilterMenu filters={filters} setFilters={setFilters} />
@@ -84,6 +85,7 @@ export const App = (): JSX.Element => {
                         <MenuLayout
                             Icon={Filter}
                             toggleExpand={toggleExpand}
+                            name="Search"
                             isActive={expandedMenus.indexOf('Search') !== -1}
                         >
                             <SearchMenu filters={filters} setFilters={setFilters} />

@@ -6,14 +6,16 @@ function MenuLayout({
     toggleExpand,
     isActive,
     Icon,
+    name,
 }: {
     children: React.ReactNode
     toggleExpand: (name: string) => void
     isActive: boolean
     Icon: React.FC<IconProps>
+    name: string
 }): JSX.Element {
     return (
-        <React.Fragment key={name}>
+        <React.Fragment>
             <button
                 className="pl-4 py-2 bg-gray-50 border-b border-gray-300"
                 onClick={() => {
