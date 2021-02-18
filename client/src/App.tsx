@@ -20,8 +20,8 @@ export const App = (): JSX.Element => {
                 className={`w-screen grid gap-0 transition-grid-cols h-full overflow-auto ${currentGridSetup}`}
             >
                 <section
-                    className={` fixed ${
-                        menuExpanded ? 'w-3/4' : 'w-0'
+                    className={` fixed z-20 ${
+                        menuExpanded ? 'w-full' : 'w-0'
                     } lg:w-60 lg:relative overflow-y-scroll h-full transition-width lg:transition-none`}
                 >
                     <Menu />
