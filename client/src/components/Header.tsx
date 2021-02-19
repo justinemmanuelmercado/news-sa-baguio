@@ -26,7 +26,7 @@ function Header({
                     />
                 </svg>
             </button>
-            <h1 className="font-bold text-green-100 text-3xl lg:text-2xl">news.bageeyow</h1>
+            <h1 className="font-bold text-green-100 text-3xl lg:text-2xl">news.baguio</h1>
         </nav>
     )
 }

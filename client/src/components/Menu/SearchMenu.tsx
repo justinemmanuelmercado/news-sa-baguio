@@ -25,7 +25,7 @@ function SearchMenu({
         <>
             <form
                 onSubmit={handleSearch}
-                className="flex flex-row rounded-sm focus-within:ring-2 focus-within:ring-blue-500 text-base text-gray-700 ring-1 ring-gray-300 bg-gray-50"
+                className="flex flex-row rounded-sm text-base text-gray-700 border border-gray-300 bg-gray-50"
             >
                 <input
                     className="p-4 rounded-l-sm text-base text-black h-12 w-4/5"

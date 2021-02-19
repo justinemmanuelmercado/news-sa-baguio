@@ -12,7 +12,7 @@ function DateInput(
     return (
         <input
             {...props}
-            className="mt-2 py-3 px-2 rounded-sm focus:ring-2 focus:ring-blue-500 text-base text-gray-700 ring-1 ring-gray-300 bg-gray-50"
+            className="mt-2 py-3 px-2 rounded-sm text-base text-gray-700 border border-gray-300 bg-gray-50"
         />
     )
 }

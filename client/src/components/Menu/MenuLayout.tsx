@@ -17,7 +17,8 @@ function MenuLayout({
     return (
         <React.Fragment>
             <button
-                className="pl-4 py-2 bg-gray-50 border-b border-gray-300"
+                aria-label={`Open ${name} tab`}
+                className="pl-4 py-2 bg-gray-50 border-b border-gray-300 focus:outline-black"
                 onClick={() => {
                     toggleExpand(name)
                 }}
