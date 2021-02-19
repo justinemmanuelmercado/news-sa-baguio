@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react'
-import { fetchSources } from '../../redux/filters'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../../redux/store'
+import React from 'react'
+import { NewsSource } from '../../redux/filters'
 import dayjs from 'dayjs'
 import xor from 'lodash/xor'
 import { Filters } from '../../App'
@@ -18,15 +16,17 @@ function DateInput(
 }
 
 function FilterMenu({
+    sources,
     filters,
     setFilters,
+    sourcesStatus,
 }: {
+    sources: NewsSource[]
     filters: Filters
     setFilters: (f: Filters) => void
+    sourcesStatus: string
 }): JSX.Element {
-    const { shownSources, fromDate, toDate } = filters
-    const { sources, status } = useSelector((state: RootState) => state.filters)
-    const dispatch = useDispatch()
+    const { hiddenSources, fromDate, toDate } = filters
     const dateFormat = 'YYYY-MM-DD'
     const min = '2021-01-01'
     const max = dayjs().format('YYYY-MM-DD')
@@ -36,7 +36,7 @@ function FilterMenu({
     }
 
     const handleCheckboxChange = async (sourceId: string) => {
-        handleFilterChange({ shownSources: xor(shownSources, [sourceId]) })
+        handleFilterChange({ hiddenSources: xor(hiddenSources, [sourceId]) })
     }
     const handleDateChange = (evt: React.FormEvent<HTMLInputElement>) => {
         switch (evt.currentTarget.id) {
@@ -51,19 +51,12 @@ function FilterMenu({
         }
     }
 
-    useEffect(() => {
-        const fetchAll = async () => {
-            dispatch(fetchSources())
-        }
-
-        fetchAll()
-    }, [])
     return (
         <>
             <div>
                 <h2 className="font-bold uppercase">sources</h2>
                 <ul className="pt-4">
-                    {status === 'loading' && (
+                    {sourcesStatus === 'loading' && (
                         <div className="space-y-4">
                             <li>
                                 <div className="h-2 animate-pulse bg-gray-200 rounded"></div>
@@ -80,14 +73,14 @@ function FilterMenu({
                         </div>
                     )}
 
-                    {status === 'succeeded' &&
+                    {sourcesStatus === 'success' &&
                         sources.map((source) => {
                             return (
                                 <li key={source.id}>
                                     <input
                                         onChange={() => handleCheckboxChange(source.id)}
                                         value={source.name}
-                                        checked={shownSources.includes(source.id)}
+                                        checked={!hiddenSources.includes(source.id)}
                                         className="cursor-pointer"
                                         type="checkbox"
                                         name={source.name}

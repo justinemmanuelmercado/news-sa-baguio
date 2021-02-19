@@ -5,13 +5,13 @@ function MenuLayout({
     children,
     toggleExpand,
     isActive,
-    Icon,
+    icon: Icon,
     name,
 }: {
     children: React.ReactNode
     toggleExpand: (name: string) => void
     isActive: boolean
-    Icon: React.FC<IconProps>
+    icon: React.FC<IconProps>
     name: string
 }): JSX.Element {
     return (

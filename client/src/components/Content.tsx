@@ -1,10 +1,9 @@
-import React, { useMemo } from 'react'
+import React, { useContext, useMemo } from 'react'
 import { ChevronsLeft, ChevronsRight, ExternalLink, Link } from 'react-feather'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../redux/store'
 import dayjs from 'dayjs'
 import truncate from 'lodash/truncate'
-import { setCompact } from '../redux/content'
+import { Content as ContentType } from '../redux/content'
+import { CompactContentContext } from './AppBody'
 
 const BlankBar = () => <div className="h-4 bg-gray-200 rounded"></div>
 
@@ -49,28 +48,27 @@ function Blank({ isLoading }: { isLoading: boolean }): JSX.Element {
     )
 }
 
-function Content(): JSX.Element {
-    const { item, status, compact } = useSelector((state: RootState) => state.content)
-    const dispatch = useDispatch()
+function Content({ content, status }: { content: ContentType; status: string }): JSX.Element {
+    const { compactContent, setCompactContent } = useContext(CompactContentContext)
     const createdAtString = useMemo(() => {
-        if (!item?.createdAt) {
+        if (!content?.createdAt) {
             return ''
         } else {
-            return dayjs(item.createdAt).format('MMMM DD, YYYY')
+            return dayjs(content.createdAt).format('MMMM DD, YYYY')
         }
-    }, [item])
+    }, [content])
 
     const handleToggleCompact = () => {
-        dispatch(setCompact({ compact: !compact }))
+        setCompactContent(!compactContent)
     }
 
     const articleUrl = useMemo(() => {
-        if (!item?.url) {
+        if (!content?.url) {
             return ''
         } else {
-            return truncate(item.url, { length: 50, omission: '...' })
+            return truncate(content.url, { length: 50, omission: '...' })
         }
-    }, [item])
+    }, [content])
 
     return (
         <div>
@@ -80,38 +78,38 @@ function Content(): JSX.Element {
                 onClick={handleToggleCompact}
                 className="z-10 absolute p-3 rounded-full border border-gray-500 bg-gray-50 animate-none shadow-xl m-2 text-gray-500 flex items-center justify-center"
             >
-                {compact ? <ChevronsLeft /> : <ChevronsRight />}
+                {compactContent ? <ChevronsLeft /> : <ChevronsRight />}
             </button>
             <div>
                 {status === 'loading' && <Blank isLoading={true} />}
                 {status === 'idle' && <Blank isLoading={false} />}
-                {status === 'succeeded' && (
+                {status === 'success' && (
                     <article>
                         <div>
-                            {item.image ? (
+                            {content.image ? (
                                 <div className="border-b-8 border-gray-200 rounded-sm h-96 overflow-hidden ">
                                     <img
                                         className="w-full h-full object-cover rounded-sm"
-                                        src={item.image}
-                                        alt={item.description}
+                                        src={content.image}
+                                        alt={content.description}
                                     ></img>
                                 </div>
                             ) : (
                                 <div className="h-96 bg-gray-200"></div>
                             )}
                             <div className="p-8 flex flex-col justify-between space-y-2 w-full">
-                                <h1 className="font-black text-black text-4xl">{item.title}</h1>
+                                <h1 className="font-black text-black text-4xl">{content.title}</h1>
                                 <div className="flex md:flex-row flex-col space-y-2 lg:space-y-0 lg:space-x-4 cursor-default">
                                     <a
                                         className="underline text-gray-700 flex items-center hover:text-green-100"
-                                        href={item.newsSource.homepage}
+                                        href={content.newsSource.homepage}
                                     >
                                         <ExternalLink className="mr-1" size="1rem" />{' '}
-                                        {item.newsSource.name}
+                                        {content.newsSource.name}
                                     </a>
                                     <a
                                         className="underline text-gray-700 flex items-center hover:text-green-100"
-                                        href={item.url}
+                                        href={content.url}
                                     >
                                         <Link className="mr-1" size="1rem" /> {articleUrl}
                                     </a>
@@ -124,7 +122,7 @@ function Content(): JSX.Element {
                                 <div
                                     className="prose-lg"
                                     dangerouslySetInnerHTML={{
-                                        __html: item.body,
+                                        __html: content.body,
                                     }}
                                 ></div>
                             </div>

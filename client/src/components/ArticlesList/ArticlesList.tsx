@@ -1,11 +1,9 @@
-import React, { useEffect, useRef } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useContext, useEffect, useRef } from 'react'
 import { Article } from '../../redux/articles'
-import { RootState } from '../../redux/store'
-import { fetchContent } from '../../redux/content'
 import ArticleItem from './ArticleItem'
 import debounce from 'lodash/debounce'
 import { FetchNextPageOptions, InfiniteData, InfiniteQueryObserverResult } from 'react-query'
+import { CompactContentContext } from '../AppBody'
 
 const LoadingArticle = () => {
     return (
@@ -30,15 +28,18 @@ function ArticlesList({
     articles,
     status,
     fetchNextPage,
+    setContentId,
+    contentId,
 }: {
     articles: InfiniteData<Article[]>
     status: string
     fetchNextPage: (
         options?: FetchNextPageOptions,
     ) => Promise<InfiniteQueryObserverResult<Article[], unknown>>
+    setContentId: (id: string) => void
+    contentId: string
 }): JSX.Element {
-    const dispatch = useDispatch()
-    const { item } = useSelector((state: RootState) => state.content)
+    const { setCompactContent } = useContext(CompactContentContext)
     const panelRef = useRef<HTMLDivElement>(null)
     const attachScrollRef = () => {
         if (panelRef.current) {
@@ -61,7 +62,8 @@ function ArticlesList({
     }, [])
 
     const handleArticleClick = (id: string) => {
-        dispatch(fetchContent(id))
+        setCompactContent(false)
+        setContentId(id)
     }
 
     return (
@@ -79,7 +81,7 @@ function ArticlesList({
                                 {articlePage.map((article) => {
                                     return (
                                         <ArticleItem
-                                            selected={item?.id === article.id}
+                                            selected={article.id === contentId}
                                             handleArticleClick={handleArticleClick}
                                             article={article}
                                             key={article.id}
