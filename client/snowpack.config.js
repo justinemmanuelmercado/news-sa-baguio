@@ -10,7 +10,6 @@ module.exports = {
         '@snowpack/plugin-typescript',
         '@snowpack/plugin-postcss',
         '@snowpack/plugin-dotenv',
-        '@snowpack/plugin-webpack',
     ],
     optimize: {
         bundle: true,
