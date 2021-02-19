@@ -12,7 +12,7 @@ function DateInput(
     return (
         <input
             {...props}
-            className="mt-2 py-3 px-2 rounded-sm text-base text-gray-700 border border-gray-300 bg-gray-50"
+            className="mt-2 py-4 px-2 rounded-sm text-base text-gray-700 border border-gray-300 bg-gray-50"
         />
     )
 }
@@ -62,7 +62,7 @@ function FilterMenu({
         <>
             <div>
                 <h2 className="font-bold uppercase">sources</h2>
-                <ul className="pt-4 pl-2">
+                <ul className="pt-4">
                     {status === 'loading' && (
                         <div className="space-y-4">
                             <li>
@@ -103,7 +103,7 @@ function FilterMenu({
             </div>
             <div>
                 <h2 className="font-bold uppercase">date</h2>
-                <span className="flex flex-col pt-4 pl-2 space-y-2">
+                <span className="flex flex-col pt-4 space-y-2">
                     <span className="flex flex-col">
                         <label htmlFor="from">From:</label>
                         <DateInput

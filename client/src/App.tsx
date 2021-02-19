@@ -70,7 +70,7 @@ export const App = (): JSX.Element => {
             <AppBody>
                 <section
                     className={` fixed z-20 ${
-                        menuExpanded ? 'w-full' : 'w-0'
+                        menuExpanded ? 'w-screen' : 'w-0'
                     } lg:w-60 lg:relative overflow-y-scroll h-full transition-width lg:transition-none`}
                 >
                     <Menu>
