@@ -8,8 +8,14 @@ export const CompactContentContext = createContext({
     },
 })
 
-export const AppBody = ({ children }: { children: React.ReactNode }): JSX.Element => {
-    const [compactContent, setCompactContent] = useState<boolean>(true)
+export const AppBody = ({
+    children,
+    defaultCompact = true,
+}: {
+    children: React.ReactNode
+    defaultCompact: boolean
+}): JSX.Element => {
+    const [compactContent, setCompactContent] = useState<boolean>(defaultCompact)
     const currentGridSetup = compactContent
         ? 'grid-cols-mobile-main-list lg:grid-cols-main-list'
         : 'grid-cols-mobile-main-content lg:grid-cols-main-content'

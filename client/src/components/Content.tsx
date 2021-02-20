@@ -72,7 +72,6 @@ function Content({ content, status }: { content: ContentType; status: string }):
 
     return (
         <div>
-            {' '}
             <button
                 aria-label="hide or show content"
                 onClick={handleToggleCompact}

@@ -12,7 +12,7 @@ import { Filter, Search } from 'react-feather'
 import FilterMenu from './components/Menu/FilterMenu'
 import SearchMenu from './components/Menu/SearchMenu'
 import { AppBody } from './components/AppBody'
-
+import { useParams, useHistory } from 'react-router-dom'
 export interface Filters {
     items: number
     hiddenSources: string[]
@@ -21,8 +21,10 @@ export interface Filters {
     search: string
 }
 export const App = (): JSX.Element => {
+    const params = useParams<{ id?: string }>()
+    const history = useHistory()
     const [menuExpanded, setMenuExpanded] = useState<boolean>(false)
-    const [contentId, setContentId] = useState<string>('')
+    const [contentId, setContentId] = useState<string>(params.id ? params.id : '')
     const [filters, setFilters] = useState<Filters>({
         items: 10,
         hiddenSources: [],
@@ -71,10 +73,14 @@ export const App = (): JSX.Element => {
         menuExpanded ? 'w-screen' : 'w-0'
     } lg:w-60 lg:relative overflow-y-scroll h-full transition-width lg:transition-none`
 
+    const updateContentId = (id: string) => {
+        setContentId(id)
+        history.push(`/${id}`)
+    }
     return (
         <div className="grid-rows-app h-screen grid">
             <Header setMenuExpanded={setMenuExpanded} menuExpanded={menuExpanded} />
-            <AppBody>
+            <AppBody defaultCompact={!params.id}>
                 <section className={menuSectionClass}>
                     <Menu>
                         <MenuLayout
@@ -105,10 +111,11 @@ export const App = (): JSX.Element => {
                         status={articlesStatus}
                         articles={articles}
                         fetchNextPage={fetchNextPage}
-                        setContentId={setContentId}
+                        setContentId={updateContentId}
                         contentId={contentId}
                     />
                 </section>
+
                 <section className="overflow-y-scroll h-full">
                     <Content content={content} status={contentStatus} />
                 </section>

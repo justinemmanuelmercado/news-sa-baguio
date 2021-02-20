@@ -5,18 +5,24 @@ import { store } from './redux/store'
 import { Provider } from 'react-redux'
 import './index.css'
 import { QueryClientProvider, QueryClient, Query } from 'react-query'
-
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 const rootElement = document.getElementById('app')
 
 const queryClient = new QueryClient()
 
 ReactDOM.render(
     <React.StrictMode>
-        <Provider store={store}>
-            <QueryClientProvider client={queryClient}>
-                <App />
-            </QueryClientProvider>
-        </Provider>
+        <Router>
+            <Switch>
+                <Route path={['/:id', '/']}>
+                    <Provider store={store}>
+                        <QueryClientProvider client={queryClient}>
+                            <App />
+                        </QueryClientProvider>
+                    </Provider>
+                </Route>
+            </Switch>
+        </Router>
     </React.StrictMode>,
     rootElement,
 )

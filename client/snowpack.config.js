@@ -1,6 +1,7 @@
 /** @type {import("snowpack").SnowpackUserConfig } */
 /* eslint-env node */
 module.exports = {
+    routes: [{ match: 'routes', src: '.*', dest: '/index.html' }],
     mount: {
         public: '/',
         src: '/dist',
