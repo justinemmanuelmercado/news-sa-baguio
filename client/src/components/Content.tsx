@@ -76,7 +76,7 @@ function Content({ content, status }: { content: ContentType; status: string }):
             <button
                 aria-label="hide or show content"
                 onClick={handleToggleCompact}
-                className="z-10 absolute p-3 rounded-full border border-gray-500 bg-gray-50 animate-none shadow-xl m-2 text-gray-500 flex items-center justify-center"
+                className="z-10 fixed p-3 rounded-full border border-gray-500 bg-gray-50 animate-none shadow-xl m-2 text-gray-500 flex items-center justify-center"
             >
                 {compactContent ? <ChevronsLeft /> : <ChevronsRight />}
             </button>
