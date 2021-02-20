@@ -1,10 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { App } from './App'
-import { store } from './redux/store'
-import { Provider } from 'react-redux'
 import './index.css'
-import { QueryClientProvider, QueryClient, Query } from 'react-query'
+import { QueryClientProvider, QueryClient } from 'react-query'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 const rootElement = document.getElementById('app')
 
@@ -15,11 +13,9 @@ ReactDOM.render(
         <Router>
             <Switch>
                 <Route path={['/:id', '/']}>
-                    <Provider store={store}>
-                        <QueryClientProvider client={queryClient}>
-                            <App />
-                        </QueryClientProvider>
-                    </Provider>
+                    <QueryClientProvider client={queryClient}>
+                        <App />
+                    </QueryClientProvider>
                 </Route>
             </Switch>
         </Router>
