@@ -3,7 +3,6 @@ import dayjs from 'dayjs'
 import { Article } from '../redux/articles'
 import { Content } from '../redux/content'
 import { NewsSource } from '../redux/filters'
-import { RootState } from '../redux/store'
 
 class SbHandler {
     private client: SupabaseClient
@@ -24,7 +23,7 @@ class SbHandler {
         fromDate,
         toDate,
         search,
-    }: RootState['filters']['actualFilters']): Promise<Article[]> => {
+    }): Promise<Article[]> => {
         const rangeMin = (page - 1) * items
         const rangeMax = rangeMin + (items - 1)
 
@@ -84,7 +83,7 @@ class SbHandler {
             return data as NewsSource[]
         } else {
             console.log(error.message)
-            throw new Error()
+            throw new Error('Failed to load news sources')
         }
     }
 }
