@@ -26,7 +26,7 @@ export class PuppeteerHandler {
         }
 
         if (this.pages[url]) {
-            this.pages[url].goto(url, { waitUntil: ['load', 'networkidle2'], timeout: 0 })
+            this.pages[url].goto(url, { waitUntil: ['load', 'networkidle2'], timeout: 15000 })
 
             const result = await pageHandler(this.pages[url])
             await this.pages[url].close()
@@ -36,7 +36,7 @@ export class PuppeteerHandler {
             this.pages[url].setUserAgent(
                 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
             )
-            this.pages[url].goto(url, { waitUntil: ['load', 'networkidle2'], timeout: 0 })
+            this.pages[url].goto(url, { waitUntil: ['load', 'networkidle2'], timeout: 15000 })
             const result = await pageHandler(this.pages[url])
             await this.pages[url].close()
             return result
