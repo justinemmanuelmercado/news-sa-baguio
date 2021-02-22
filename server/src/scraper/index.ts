@@ -6,11 +6,10 @@ import { Sunstar } from './source/Sunstar'
 import { Abscbn } from './source/Abscbn'
 import { Pia } from './source/Pia'
 import { log } from './logger'
-import { ToadScheduler, SimpleIntervalJob, AsyncTask } from 'toad-scheduler'
 
-const main = async () => {
+export const main = async (): Promise<void> => {
     log('SCRAPING STARTED, ' + new Date().toString())
-
+    console.log('\n\n')
     await puppeteerHandler.init()
     const supabase = new Supabase()
     await supabase.initSkipUrls()
@@ -25,7 +24,7 @@ const main = async () => {
         .finally(async () => {
             await puppeteerHandler.closeBrowser()
             log('SCRAPING ENDED, ' + new Date().toString())
-            log('\n\n')
+            console.log('\n\n')
         })
         .catch((e) => {
             log('SCRAPING THREW SOMEWHERE HERE', 'MAIN', false)
@@ -33,17 +32,4 @@ const main = async () => {
         })
 }
 
-const scheduler = new ToadScheduler()
-
-const task = new AsyncTask(
-    'Scraping',
-    () => {
-        return main()
-    },
-    (err) => {
-        log('Failed to scrape', 'MAIN', false)
-    },
-)
-
-const job = new SimpleIntervalJob({ hours: 3 }, task)
-scheduler.addSimpleIntervalJob(job)
+// main()

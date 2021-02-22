@@ -7,7 +7,9 @@
     "build": "rimraf ./dist && tsc",
     "start": "node /index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "scrape": "NODE_ENV=production pm2 start ./dist/scraper/index.js -l ./scraper.log --watch",
+    "scrape": "node ./dist/scraper/index.js",
+    "scrape:build": "npm run build && npm run scrape",
+    "scrape:watch": "NODE_ENV=production pm2 start ./dist/scraper/index.js -l ./scraper.log --watch",
     "lint": "eslint ./src/**/**/*.ts ./src/**/*.ts --fix"
   },
   "keywords": [],
