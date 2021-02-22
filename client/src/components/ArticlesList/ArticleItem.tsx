@@ -63,7 +63,7 @@ const ArticleItem = ({
                 )}
                 <div
                     className={`h-40 min-h-32 pl-4 py-1 flex flex-col justify-between ${
-                        article.image ? 'w-3/4' : ''
+                        article.image ? 'w-3/4' : 'w-full'
                     } ${selected ? 'border-r-4 border-green-100' : ''}`}
                 >
                     <div>
