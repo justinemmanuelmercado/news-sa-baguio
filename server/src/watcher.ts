@@ -6,13 +6,13 @@ const scheduler = new ToadScheduler()
 
 const task = new AsyncTask(
     'Scraping',
-    () => {
-        return main()
+    async () => {
+        return await main()
     },
     (err) => {
         log('Failed to scrape', 'MAIN', false)
     },
 )
 
-const job = new SimpleIntervalJob({ hours: 3 }, task)
+const job = new SimpleIntervalJob({ hours: 6 }, task)
 scheduler.addSimpleIntervalJob(job)
