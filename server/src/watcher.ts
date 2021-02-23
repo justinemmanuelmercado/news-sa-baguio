@@ -1,18 +1,11 @@
-import { log } from 'console'
-import { ToadScheduler, AsyncTask, SimpleIntervalJob } from 'toad-scheduler'
 import { main } from './scraper'
+import cron from 'node-cron'
 
-const scheduler = new ToadScheduler()
+const task = cron.schedule('* */6 * * *', () => {
+    const toRun = async () => {
+        await main()
+    }
+    toRun()
+})
 
-const task = new AsyncTask(
-    'Scraping',
-    async () => {
-        return await main()
-    },
-    (err) => {
-        log('Failed to scrape', 'MAIN', false)
-    },
-)
-
-const job = new SimpleIntervalJob({ hours: 6 }, task)
-scheduler.addSimpleIntervalJob(job)
+task.start()

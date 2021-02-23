@@ -1,0 +1,158 @@
+
+[SUCCESS] [GENERAL] : SCRAPING STARTED, Tue Feb 23 2021 09:21:00 GMT+0800 (Philippine Standard Time)
+
+
+
+[SUCCESS] [PUPPETEER] : Opening the browser...
+[SUCCESS] [SUPABASE] : Loading first 200 URLs
+Error: Navigation failed because browser has disconnected!
+    at /Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/LifecycleWatcher.js:51:147
+    at /Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/vendor/mitt/src/index.js:51:62
+    at Array.map (<anonymous>)
+    at Object.emit (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/vendor/mitt/src/index.js:51:43)
+    at CDPSession.emit (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/EventEmitter.js:72:22)
+    at CDPSession._onClosed (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/Connection.js:247:14)
+    at Connection._onMessage (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/Connection.js:94:25)
+    at WebSocket.<anonymous> (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/node/NodeWebSocketTransport.js:13:32)
+    at WebSocket.onMessage (/Users/ej/Projects/news.sa-baguio/server/node_modules/ws/lib/event-target.js:132:16)
+    at WebSocket.emit (events.js:210:5)
+[FAILED] [PUPPETEER] : Unhandled Rejection at: Promise: Navigation failed because browser has disconnected!
+[SUCCESS] [PIA] : Scraping PIA
+[SUCCESS] [PIA] : Finished scraping PIA
+[SUCCESS] [PIA] : CLEANING CONTENT FOR PIA
+[SUCCESS] [PIA] : Starting article inserts for PIA
+[SUCCESS] [PIA] : No articles found to insert for PIA
+[SUCCESS] [PIA] : Ending insert articles for PIA
+Error: Navigation failed because browser has disconnected!
+    at /Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/LifecycleWatcher.js:51:147
+    at /Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/vendor/mitt/src/index.js:51:62
+    at Array.map (<anonymous>)
+    at Object.emit (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/vendor/mitt/src/index.js:51:43)
+    at CDPSession.emit (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/EventEmitter.js:72:22)
+    at CDPSession._onClosed (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/Connection.js:247:14)
+    at Connection._onMessage (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/Connection.js:94:25)
+    at WebSocket.<anonymous> (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/node/NodeWebSocketTransport.js:13:32)
+    at WebSocket.onMessage (/Users/ej/Projects/news.sa-baguio/server/node_modules/ws/lib/event-target.js:132:16)
+    at WebSocket.emit (events.js:210:5)
+[FAILED] [PUPPETEER] : Unhandled Rejection at: Promise: Navigation failed because browser has disconnected!
+[SUCCESS] [ABS CBN] : Scraping ABS CBN
+[SUCCESS] [ABS CBN] : Finished scraping ABS CBN
+[SUCCESS] [ABS CBN] : CLEANING CONTENT FOR ABS CBN
+[SUCCESS] [ABS CBN] : Starting article inserts for ABS CBN
+[SUCCESS] [ABS CBN] : No articles found to insert for ABS CBN
+[SUCCESS] [ABS CBN] : Ending insert articles for ABS CBN
+Error: Navigation failed because browser has disconnected!
+    at /Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/LifecycleWatcher.js:51:147
+    at /Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/vendor/mitt/src/index.js:51:62
+    at Array.map (<anonymous>)
+    at Object.emit (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/vendor/mitt/src/index.js:51:43)
+    at CDPSession.emit (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/EventEmitter.js:72:22)
+    at CDPSession._onClosed (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/Connection.js:247:14)
+    at Connection._onMessage (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/Connection.js:94:25)
+    at WebSocket.<anonymous> (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/node/NodeWebSocketTransport.js:13:32)
+    at WebSocket.onMessage (/Users/ej/Projects/news.sa-baguio/server/node_modules/ws/lib/event-target.js:132:16)
+    at WebSocket.emit (events.js:210:5)
+[FAILED] [PUPPETEER] : Unhandled Rejection at: Promise: Navigation failed because browser has disconnected!
+[SUCCESS] [Inquirer] : Scraping Inquirer
+[SUCCESS] [Inquirer] : Finished scraping Inquirer
+[SUCCESS] [Inquirer] : CLEANING CONTENT FOR Inquirer
+[SUCCESS] [Inquirer] : Starting article inserts for Inquirer
+[SUCCESS] [Inquirer] : No articles found to insert for Inquirer
+[SUCCESS] [Inquirer] : Ending insert articles for Inquirer
+Error: Navigation failed because browser has disconnected!
+    at /Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/LifecycleWatcher.js:51:147
+    at /Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/vendor/mitt/src/index.js:51:62
+    at Array.map (<anonymous>)
+    at Object.emit (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/vendor/mitt/src/index.js:51:43)
+    at CDPSession.emit (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/EventEmitter.js:72:22)
+    at CDPSession._onClosed (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/Connection.js:247:14)
+    at Connection._onMessage (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/Connection.js:94:25)
+    at WebSocket.<anonymous> (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/node/NodeWebSocketTransport.js:13:32)
+    at WebSocket.onMessage (/Users/ej/Projects/news.sa-baguio/server/node_modules/ws/lib/event-target.js:132:16)
+    at WebSocket.emit (events.js:210:5)
+[FAILED] [PUPPETEER] : Unhandled Rejection at: Promise: Navigation failed because browser has disconnected!
+[SUCCESS] [Sunstar] : Scraping Sunstar
+[SUCCESS] [Sunstar] : Finished scraping Sunstar
+[SUCCESS] [Sunstar] : CLEANING CONTENT FOR Sunstar
+[SUCCESS] [Sunstar] : Starting article inserts for Sunstar
+[SUCCESS] [Sunstar] : No articles found to insert for Sunstar
+[SUCCESS] [Sunstar] : Ending insert articles for Sunstar
+[FAILED] [PUPPETEER] : Closing browser...
+[SUCCESS] [GENERAL] : SCRAPING ENDED, Tue Feb 23 2021 09:21:33 GMT+0800 (Philippine Standard Time)
+
+
+
+[FAILED] [MAIN] : SCRAPING THREW SOMEWHERE HERE
+[FAILED] [MAIN] : waiting for selector `#main` failed: timeout 30000ms exceeded
+[SUCCESS] [GENERAL] : SCRAPING STARTED, Tue Feb 23 2021 09:22:00 GMT+0800 (Philippine Standard Time)
+
+
+
+[SUCCESS] [SUPABASE] : Loading first 200 URLs
+[FAILED] [PUPPETEER] : Closing browser...
+[SUCCESS] [GENERAL] : SCRAPING ENDED, Tue Feb 23 2021 09:22:01 GMT+0800 (Philippine Standard Time)
+
+
+
+[FAILED] [MAIN] : SCRAPING THREW SOMEWHERE HERE
+[FAILED] [MAIN] : Protocol error (Runtime.callFunctionOn): Session closed. Most likely the page has been closed.
+Error: Protocol error (Page.navigate): Session closed. Most likely the page has been closed.
+    at CDPSession.send (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/Connection.js:195:35)
+    at navigate (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/FrameManager.js:108:47)
+    at FrameManager.navigateFrame (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/FrameManager.js:91:13)
+    at Frame.goto (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/FrameManager.js:417:41)
+    at Page.goto (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/Page.js:784:53)
+    at PuppeteerHandler.<anonymous> (/Users/ej/Projects/news.sa-baguio/server/dist/scraper/puppeteer/index.js:87:41)
+    at step (/Users/ej/Projects/news.sa-baguio/server/dist/scraper/puppeteer/index.js:33:23)
+    at Object.next (/Users/ej/Projects/news.sa-baguio/server/dist/scraper/puppeteer/index.js:14:53)
+    at /Users/ej/Projects/news.sa-baguio/server/dist/scraper/puppeteer/index.js:8:71
+    at new Promise (<anonymous>)
+[FAILED] [PUPPETEER] : Unhandled Rejection at: Promise: Protocol error (Page.navigate): Session closed. Most likely the page has been closed.
+[FAILED] [PUPPETEER] : Unhandled Rejection at: Promise: Protocol error (Page.navigate): Session closed. Most likely the page has been closed.
+Error: Protocol error (Page.navigate): Session closed. Most likely the page has been closed.
+    at CDPSession.send (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/Connection.js:195:35)
+    at navigate (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/FrameManager.js:108:47)
+    at FrameManager.navigateFrame (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/FrameManager.js:91:13)
+    at Frame.goto (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/FrameManager.js:417:41)
+    at Page.goto (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/Page.js:784:53)
+    at PuppeteerHandler.<anonymous> (/Users/ej/Projects/news.sa-baguio/server/dist/scraper/puppeteer/index.js:87:41)
+    at step (/Users/ej/Projects/news.sa-baguio/server/dist/scraper/puppeteer/index.js:33:23)
+    at Object.next (/Users/ej/Projects/news.sa-baguio/server/dist/scraper/puppeteer/index.js:14:53)
+    at /Users/ej/Projects/news.sa-baguio/server/dist/scraper/puppeteer/index.js:8:71
+    at new Promise (<anonymous>)
+Error: Protocol error (Page.navigate): Session closed. Most likely the page has been closed.
+    at CDPSession.send (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/Connection.js:195:35)
+    at navigate (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/FrameManager.js:108:47)
+    at FrameManager.navigateFrame (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/FrameManager.js:91:13)
+    at Frame.goto (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/FrameManager.js:417:41)
+    at Page.goto (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/Page.js:784:53)
+    at PuppeteerHandler.<anonymous> (/Users/ej/Projects/news.sa-baguio/server/dist/scraper/puppeteer/index.js:87:41)
+    at step (/Users/ej/Projects/news.sa-baguio/server/dist/scraper/puppeteer/index.js:33:23)
+    at Object.next (/Users/ej/Projects/news.sa-baguio/server/dist/scraper/puppeteer/index.js:14:53)
+    at /Users/ej/Projects/news.sa-baguio/server/dist/scraper/puppeteer/index.js:8:71
+    at new Promise (<anonymous>)
+[FAILED] [PUPPETEER] : Unhandled Rejection at: Promise: Protocol error (Page.navigate): Session closed. Most likely the page has been closed.
+[FAILED] [PUPPETEER] : Unhandled Rejection at: Promise: Protocol error (Page.navigate): Session closed. Most likely the page has been closed.
+Error: Protocol error (Page.navigate): Session closed. Most likely the page has been closed.
+    at CDPSession.send (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/Connection.js:195:35)
+    at navigate (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/FrameManager.js:108:47)
+    at FrameManager.navigateFrame (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/FrameManager.js:91:13)
+    at Frame.goto (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/FrameManager.js:417:41)
+    at Page.goto (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/Page.js:784:53)
+    at PuppeteerHandler.<anonymous> (/Users/ej/Projects/news.sa-baguio/server/dist/scraper/puppeteer/index.js:87:41)
+    at step (/Users/ej/Projects/news.sa-baguio/server/dist/scraper/puppeteer/index.js:33:23)
+    at Object.next (/Users/ej/Projects/news.sa-baguio/server/dist/scraper/puppeteer/index.js:14:53)
+    at /Users/ej/Projects/news.sa-baguio/server/dist/scraper/puppeteer/index.js:8:71
+    at new Promise (<anonymous>)
+Error: Protocol error (Page.navigate): Session closed. Most likely the page has been closed.
+    at CDPSession.send (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/Connection.js:195:35)
+    at navigate (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/FrameManager.js:108:47)
+    at FrameManager.navigateFrame (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/FrameManager.js:91:13)
+    at Frame.goto (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/FrameManager.js:417:41)
+    at Page.goto (/Users/ej/Projects/news.sa-baguio/server/node_modules/puppeteer/lib/cjs/puppeteer/common/Page.js:784:53)
+    at PuppeteerHandler.<anonymous> (/Users/ej/Projects/news.sa-baguio/server/dist/scraper/puppeteer/index.js:87:41)
+    at step (/Users/ej/Projects/news.sa-baguio/server/dist/scraper/puppeteer/index.js:33:23)
+    at Object.next (/Users/ej/Projects/news.sa-baguio/server/dist/scraper/puppeteer/index.js:14:53)
+    at /Users/ej/Projects/news.sa-baguio/server/dist/scraper/puppeteer/index.js:8:71
+    at new Promise (<anonymous>)
+[FAILED] [PUPPETEER] : Unhandled Rejection at: Promise: Protocol error (Page.navigate): Session closed. Most likely the page has been closed.
