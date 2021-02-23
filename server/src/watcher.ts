@@ -1,7 +1,7 @@
 import { main } from './scraper'
 import cron from 'node-cron'
 
-const task = cron.schedule('* */6 * * *', () => {
+const task = cron.schedule('0 */6 * * *', () => {
     const toRun = async () => {
         await main()
     }
