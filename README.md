@@ -3,9 +3,9 @@
 ![screenshot](./screen.png)
 
 ## What is this? 
-I kept myself updated with current by reading [/r/philippines](www.reddit.com/r/philippines). But that sub quickly became depressing.
+I kept myself updated by reading [/r/philippines](www.reddit.com/r/philippines). But that sub quickly became depressing.
 
-Instead to keep myself updated with current affairs (relevant to Baguio city) I built this site. 
+I built this site to keep away from `/r/philippines`'s depressing news.
 
 To keep costs low, I'm currently hosting it on a free vercel instance here. [News In Baguio City site](https://news-sa-baguio.vercel.app/)
 
