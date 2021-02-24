@@ -9,7 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "scrape": "node ./dist/scraper/index.js",
     "scrape:build": "npm run build && npm run scrape",
-    "scrape:watch": "npm run build && NODE_ENV=production pm2 start ./dist/watcher.js -l ./scraper.log --watch",
+    "scrape:watch": "npm run build && pm2 start ./dist/scraper/index.js -l ./scraper.log --watch --cron \"*/1 * * * *\"",
     "lint": "eslint ./src/**/**/*.ts ./src/**/*.ts --fix"
   },
   "keywords": [],
@@ -18,14 +18,12 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "lodash": "^4.17.20",
-    "node-cron": "^2.0.3",
     "puppeteer": "^5.5.0"
   },
   "devDependencies": {
     "@supabase/supabase-js": "^1.3.2",
     "@types/lodash": "^4.14.168",
     "@types/node": "^14.14.21",
-    "@types/node-cron": "^2.0.3",
     "@types/puppeteer": "^5.4.2",
     "@types/sanitize-html": "^1.27.1",
     "@typescript-eslint/eslint-plugin": "^4.14.1",
