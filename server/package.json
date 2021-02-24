@@ -9,7 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "scrape": "node ./dist/scraper/index.js",
     "scrape:build": "npm run build && npm run scrape",
-    "scrape:watch": "npm run build && pm2 start ./dist/scraper/index.js -l ./scraper.log --no-autorestart --cron \"* */4 * * *\"",
+    "scrape:watch": "npm run build && pm2 start ./dist/scraper/index.js -l ./scraper.log --no-autorestart --cron \"0 */4 * * *\"",
     "lint": "eslint ./src/**/**/*.ts ./src/**/*.ts --fix"
   },
   "keywords": [],
