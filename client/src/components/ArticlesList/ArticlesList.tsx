@@ -7,7 +7,7 @@ import { CompactContentContext } from '../AppBody'
 
 const LoadingArticle = () => {
     return (
-        <div className="animate-pulse bg-gray-100 odd:bg-gray-50 flex flex-row rounded-sm shadow-lg text-left h-40 min-h-32 hover:text-green-100 border border-gray-300 w-full">
+        <div className="animate-pulse bg-gray-700 odd:bg-gray-800 flex flex-row rounded-sm shadow-lg text-left h-40 min-h-32 hover:text-green-100 border border-gray-600 w-full">
             <div className="w-1/4 h-40 min-h-32 overflow-hidden rounded-sm p-1">
                 <div className="bg-gray-200 w-full h-full flex items-center justify-center ">
                     <div className="h-5 w-5 bg-gray-100 rounded-full" />
@@ -67,7 +67,7 @@ function ArticlesList({
     }
 
     return (
-        <div ref={panelRef} className="bg-white h-full overflow-y-scroll">
+        <div ref={panelRef} className="bg-gray-600 h-full overflow-y-scroll">
             <div className="space-y-4 p-4">
                 {status === 'loading' ? (
                     <>

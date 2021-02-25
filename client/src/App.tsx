@@ -71,14 +71,14 @@ export const App = (): JSX.Element => {
     }
     const menuSectionClass = ` fixed z-20 ${
         menuExpanded ? 'w-screen' : 'w-0'
-    } lg:w-60 lg:relative overflow-y-scroll h-full transition-width lg:transition-none`
+    } lg:w-60 lg:relative overflow-y-auto h-full transition-width lg:transition-none`
 
     const updateContentId = (id: string) => {
         setContentId(id)
         history.push(`/${id}`)
     }
     return (
-        <div className="grid-rows-app h-screen grid">
+        <main className="grid-rows-app h-screen grid">
             <Header setMenuExpanded={setMenuExpanded} menuExpanded={menuExpanded} />
             <AppBody defaultCompact={!params.id}>
                 <section className={menuSectionClass}>
@@ -120,6 +120,6 @@ export const App = (): JSX.Element => {
                     <Content content={content} status={contentStatus} />
                 </section>
             </AppBody>
-        </div>
+        </main>
     )
 }
