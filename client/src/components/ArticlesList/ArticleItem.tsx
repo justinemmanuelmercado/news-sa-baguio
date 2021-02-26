@@ -4,6 +4,7 @@ import truncate from 'lodash/truncate'
 import { ExternalLink, Link } from 'react-feather'
 import dayjs from 'dayjs'
 import CustomLink from '../CustomLink'
+import { LoadingImage } from './ArticlesList'
 
 type HandleArticleClick = (id: string) => void
 
@@ -33,7 +34,7 @@ const ArticleItem = ({
         <button
             aria-label={`Read article: ${article.title}`}
             onClick={() => handleArticleClick(article.id)}
-            className={`focus:outline-black bg-gray-700 odd:bg-gray-800 flex flex-row rounded-sm cursor-pointer text-left max-h-40 min-h-32 hover:text-green-100 border border-gray-600 w-full ${
+            className={`focus:outline-black bg-gray-700 odd:bg-gray-600 flex flex-row rounded-sm cursor-pointer text-left max-h-40 min-h-32 hover:text-green-100 border border-gray-900 w-full ${
                 selected ? 'shadow-inner' : 'shadow-lg'
             }`}
         >
@@ -47,15 +48,9 @@ const ArticleItem = ({
                         onLoad={() => handleOnload()}
                         alt={article.description}
                     ></img>
-
-                    <div
-                        className={`bg-gray-200 w-full h-full flex items-center justify-center animate-pulse ${
-                            imageDidLoad ? 'hidden' : ''
-                        }`}
-                    >
-                        <div className="h-5 w-5 bg-gray-100 rounded-full" />
-                        <div className="bg-white w-8 h-8 rounded-full"></div>
-                    </div>
+                    <span className="animate-pulse">
+                        <LoadingImage />
+                    </span>
                 </div>
             ) : (
                 ''

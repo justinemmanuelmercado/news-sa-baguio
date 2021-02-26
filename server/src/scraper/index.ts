@@ -9,7 +9,7 @@ import { log } from './logger'
 
 export const main = async (): Promise<void> => {
     log('SCRAPING STARTED, ' + new Date().toString())
-    console.log('\n\n')
+    console.log('\n')
     await puppeteerHandler.init()
     const supabase = new Supabase()
     await supabase.initSkipUrls()
@@ -24,7 +24,7 @@ export const main = async (): Promise<void> => {
         .finally(async () => {
             await puppeteerHandler.closeBrowser()
             log('SCRAPING ENDED, ' + new Date().toString())
-            console.log('\n\n')
+            console.log('\n')
         })
         .catch((e) => {
             log('SCRAPING THREW SOMEWHERE HERE', 'MAIN', false)

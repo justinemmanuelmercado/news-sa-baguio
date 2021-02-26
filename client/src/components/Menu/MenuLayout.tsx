@@ -18,12 +18,12 @@ function MenuLayout({
         <React.Fragment>
             <button
                 aria-label={`Open ${name} tab`}
-                className="pl-4 py-2 bg-gray-600 border-b  border-gray-700 focus:outline-black"
+                className="pl-4 py-2 bg-gray-800 border-b  border-gray-700 focus:outline-black"
                 onClick={() => {
                     toggleExpand(name)
                 }}
             >
-                <span className="flex flex-row space-x-2 py-2 font-bold text-md items-center text-gray-200">
+                <span className="flex flex-row space-x-2 py-2 font-bold text-md items-center text-white">
                     <Icon size="1.2rem" /> <span>{name}</span>
                     {isActive ? <ChevronsUp /> : <ChevronsDown />}
                 </span>

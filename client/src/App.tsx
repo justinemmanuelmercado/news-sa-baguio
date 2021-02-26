@@ -106,7 +106,7 @@ export const App = (): JSX.Element => {
                         </MenuLayout>
                     </Menu>
                 </section>
-                <section className="overflow-y-scroll">
+                <section className="overflow-y-hidden">
                     <ArticlesList
                         status={articlesStatus}
                         articles={articles}

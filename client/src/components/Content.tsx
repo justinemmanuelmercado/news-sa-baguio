@@ -10,18 +10,16 @@ const BlankBar = () => <div className="h-4 bg-gray-200 rounded"></div>
 function Blank({ isLoading }: { isLoading: boolean }): JSX.Element {
     return (
         <article className={`${isLoading ? 'animate-pulse' : ''} `}>
-            <div className="w-full p-4 border bg-gray-100">
-                <div className="h-96 bg-gray-200"></div>
-                <h1 className="font-black text-black text-4xl p-8">
-                    {isLoading ? 'Loading...' : 'Select an article to get started'}
-                </h1>
-                <div className="py-12 px-6 bg-gray-50 border shadow-xl space-y-8">
-                    <div className="space-y-4">
-                        <BlankBar />
-                        <BlankBar />
-                        <BlankBar />
-                        <BlankBar />
-                    </div>
+            <div className="h-96 bg-gray-200"></div>
+            <h1 className="font-black text-black text-4xl p-8">
+                {isLoading ? 'Loading...' : 'Select an article to get started'}
+            </h1>
+            <div className="py-12 px-6 space-y-8">
+                <div className="space-y-4">
+                    <BlankBar />
+                    <BlankBar />
+                    <BlankBar />
+                    <BlankBar />
                 </div>
             </div>
         </article>
@@ -63,20 +61,20 @@ function Content({ content, status }: { content: ContentType; status: string }):
                 {status === 'loading' && <Blank isLoading={true} />}
                 {status === 'idle' && <Blank isLoading={false} />}
                 {status === 'success' && (
-                    <article className="w-full p-0 lg:p-4 bg-gray-400">
-                        <div className="bg-gray-50 border border-gray-200">
+                    <article className="w-full p-0 lg:p-4 bg-gray-100">
+                        <div>
+                            {content.image ? (
+                                <div className="rounded-sm h-96 overflow-hidden ">
+                                    <img
+                                        className="w-full h-full object-cover rounded-sm"
+                                        src={content.image}
+                                        alt={content.description}
+                                    ></img>
+                                </div>
+                            ) : (
+                                <div className="h-96 bg-gray-200"></div>
+                            )}
                             <div className="py-6 px-6 text-black space-y-4">
-                                {content.image ? (
-                                    <div className="rounded-sm h-96 overflow-hidden ">
-                                        <img
-                                            className="w-full h-full object-cover rounded-sm"
-                                            src={content.image}
-                                            alt={content.description}
-                                        ></img>
-                                    </div>
-                                ) : (
-                                    <div className="h-96 bg-gray-200"></div>
-                                )}
                                 <div className="pt-6 flex flex-col justify-between space-y-4">
                                     <h1 className="font-black text-black text-4xl">
                                         {content.title}

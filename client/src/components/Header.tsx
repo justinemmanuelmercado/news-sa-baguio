@@ -8,7 +8,7 @@ function Header({
     setMenuExpanded: (val: boolean) => void
 }): JSX.Element {
     return (
-        <nav className="w-screen py-2 px-4 bg-gray-800 flex items-center space-x-4 lg:space-x-0">
+        <nav className="w-screen py-2 px-4 bg-gray-900 flex items-center space-x-4 lg:space-x-0">
             <button
                 className={`flex lg:hidden menu text-green-100 ${menuExpanded ? 'opened' : ''}`}
                 onClick={() => setMenuExpanded(!menuExpanded)}
