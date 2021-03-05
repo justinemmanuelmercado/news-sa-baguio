@@ -25,12 +25,12 @@ export class Supabase {
      * of article scraping being done
      */
     initSkipUrls = async (): Promise<void> => {
-        log('Loading first 200 URLs', this.topic)
+        log('Loading first 500 URLs', this.topic)
         const { data, error } = await this.client
             .from('ArticleData')
             .select('url')
-            .order('createdAt', { ascending: false })
-            .range(0, 199)
+            .order('increment', { ascending: false })
+            .range(0, 499)
         if (error) {
             log('FAILED TO INSERT THE FOLLOWING BECAUSE OF THE FOLLOWING: ', this.topic, false)
             log(error.details, this.topic, false)
