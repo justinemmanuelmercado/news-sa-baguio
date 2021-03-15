@@ -34,7 +34,7 @@ const ArticleItem = ({
         <button
             aria-label={`Read article: ${article.title}`}
             onClick={() => handleArticleClick(article.id)}
-            className={`focus:outline-black bg-gray-700 odd:bg-gray-600 flex flex-row rounded-sm cursor-pointer text-left max-h-40 min-h-32 hover:text-green-100 border border-gray-900 w-full ${
+            className={`focus:outline-black bg-gray-50 odd:bg-gray-100 flex flex-row rounded-sm cursor-pointer text-left max-h-40 min-h-32 hover:text-green-100 border border-gray-900 w-full ${
                 selected ? 'shadow-inner' : 'shadow-lg'
             }`}
         >
@@ -62,13 +62,13 @@ const ArticleItem = ({
             >
                 <div className="px-4">
                     <div className="space-x-4">
-                        <span className="text-gray-50">
+                        <span className="text-black">
                             {article.author ? article.author : article.newsSourceObject.name}
                         </span>
-                        <span className="font-light text-gray-200">{createdAtString}</span>
+                        <span className="font-light text-gray-800">{createdAtString}</span>
                     </div>
                     <h1
-                        className="text-lg font-bold text-white"
+                        className="text-xl font-bold text-black"
                         dangerouslySetInnerHTML={{ __html: title }}
                     />
                 </div>

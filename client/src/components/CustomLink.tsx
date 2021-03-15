@@ -4,7 +4,7 @@ function CustomLink({ children, href }: { children: React.ReactNode; href: strin
     return (
         <a
             onClick={(evt) => evt.stopPropagation()}
-            className="underline text-gray-100 flex items-center hover:text-green-100"
+            className="underline text-gray-900 flex items-center hover:text-green-100"
             href={href}
             target="_blank"
             rel="noreferrer"
