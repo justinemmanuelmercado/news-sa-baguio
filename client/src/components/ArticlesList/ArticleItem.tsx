@@ -39,16 +39,14 @@ const ArticleItem = ({
             }`}
         >
             {article.image ? (
-                <div className="w-1/4 h-40 min-h-32 py-1 overflow-hidden rounded-sm">
+                <div className="w-1/4 h-40 min-h-32 p-1 overflow-hidden">
                     <img
-                        className={`object-cover w-full h-full rounded-sm ${
-                            imageDidLoad ? '' : 'hidden'
-                        }`}
+                        className={`object-cover w-full h-full ${imageDidLoad ? '' : 'hidden'}`}
                         src={article.image}
                         onLoad={() => handleOnload()}
                         alt={article.description}
                     ></img>
-                    <span className="animate-pulse">
+                    <span className={`animate-pulse ${!imageDidLoad ? '' : 'hidden'}`}>
                         <LoadingImage />
                     </span>
                 </div>
@@ -62,10 +60,12 @@ const ArticleItem = ({
             >
                 <div className="px-4">
                     <div className="space-x-4">
-                        <span className="text-black">
-                            {article.author ? article.author : article.newsSourceObject.name}
-                        </span>
                         <span className="font-light text-gray-800">{createdAtString}</span>
+                        {article.author ? (
+                            <span className="text-black">by {article.author}</span>
+                        ) : (
+                            ''
+                        )}
                     </div>
                     <h1
                         className="text-xl font-bold text-black"
