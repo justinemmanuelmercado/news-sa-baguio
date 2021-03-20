@@ -14,7 +14,7 @@ export const LoadingImage = (): JSX.Element => {
 }
 const LoadingArticle = () => {
     return (
-        <div className="animate-pulse bg-gray-50 odd:bg-gray-100 flex flex-row rounded-sm shadow-lg text-left h-40 min-h-32 hover:text-green-100 border border-gray-600 w-full">
+        <div className="animate-pulse bg-gray-50 odd:bg-gray-100 flex flex-row rounded-sm shadow-lg text-left h-40 min-h-32 hover:text-green-100 border border-gray-400 w-full">
             <div className="w-1/4 h-40 min-h-32 overflow-hidden rounded-sm p-1">
                 <LoadingImage />
             </div>
@@ -71,7 +71,7 @@ function ArticlesList({
     }
 
     return (
-        <div ref={panelRef} className="bg-gray-300 h-full overflow-y-scroll">
+        <div ref={panelRef} className="h-full overflow-y-scroll">
             <div className="space-y-4 p-4">
                 {status === 'loading' ? (
                     <>

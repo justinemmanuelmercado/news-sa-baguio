@@ -34,7 +34,7 @@ const ArticleItem = ({
         <button
             aria-label={`Read article: ${article.title}`}
             onClick={() => handleArticleClick(article.id)}
-            className={`focus:outline-black bg-gray-50 odd:bg-gray-100 flex flex-row rounded-sm cursor-pointer text-left max-h-40 min-h-32 hover:text-green-100 border border-gray-900 w-full ${
+            className={`focus:outline-black bg-gray-50 odd:bg-gray-100 flex flex-row rounded-sm cursor-pointer text-left max-h-40 min-h-32 hover:text-green-100 border border-gray-400 w-full ${
                 selected ? 'shadow-inner' : 'shadow-lg'
             }`}
         >

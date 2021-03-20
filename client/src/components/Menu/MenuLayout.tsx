@@ -1,43 +1,26 @@
 import React from 'react'
-import { ChevronsDown, ChevronsUp, IconProps } from 'react-feather'
+import { IconProps } from 'react-feather'
 
 function MenuLayout({
     children,
-    toggleExpand,
-    isActive,
     icon: Icon,
     name,
 }: {
     children: React.ReactNode
-    toggleExpand: (name: string) => void
-    isActive: boolean
     icon: React.FC<IconProps>
     name: string
 }): JSX.Element {
     return (
-        <React.Fragment>
-            <button
-                aria-label={`Open ${name} tab`}
-                className="pl-4 py-2 bg-gray-800 border-b  border-gray-700 focus:outline-black"
-                onClick={() => {
-                    toggleExpand(name)
-                }}
-            >
-                <span className="flex flex-row space-x-2 py-2 font-bold text-md items-center text-white">
-                    <Icon size="1.2rem" /> <span>{name}</span>
-                    {isActive ? <ChevronsUp /> : <ChevronsDown />}
+        <div>
+            <div aria-label={`Open ${name} tab`} className="focus:outline-black">
+                <span className="flex flex-row space-x-2 py-2 font-bold text-lg items-center text-white">
+                    <Icon className="text-gray-300" size="1rem" /> <span>{name}</span>
                 </span>
-            </button>
-            <div
-                className={`${
-                    isActive ? 'max-h-full' : 'max-h-0'
-                } transition-max-height overflow-hidden`}
-            >
-                <div className="py-8 px-6 text-base space-y-4 bg-gray-700 shadow-inner border-b border-gray-700 text-gray-50">
-                    {children}
-                </div>
             </div>
-        </React.Fragment>
+            <div>
+                <div className="text-base space-y-4 text-gray-50 px-6 py-2">{children}</div>
+            </div>
+        </div>
     )
 }
 

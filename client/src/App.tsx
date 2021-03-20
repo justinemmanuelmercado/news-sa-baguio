@@ -7,9 +7,10 @@ import { useInfiniteQuery, useQuery } from 'react-query'
 import { sb } from './lib/api'
 import dayjs from 'dayjs'
 import MenuLayout from './components/Menu/MenuLayout'
-import { reduce, xor } from 'lodash'
-import { Filter, Search } from 'react-feather'
-import FilterMenu from './components/Menu/FilterMenu'
+import { reduce } from 'lodash'
+import { Book, Calendar, Search } from 'react-feather'
+import SourcesMenu from './components/Menu/SourcesMenu'
+import DateMenu from './components/Menu/DateMenu'
 import SearchMenu from './components/Menu/SearchMenu'
 import { AppBody } from './components/AppBody'
 import { useParams, useHistory } from 'react-router-dom'
@@ -63,15 +64,9 @@ export const App = (): JSX.Element => {
         { enabled: contentId.length > 0 },
     )
 
-    const [expandedMenus, setExpandedMenus] = useState<string[]>(['Filter', 'Search', 'Options'])
-
-    const toggleExpand = (name: string) => {
-        const newExpanded = xor(expandedMenus, [name])
-        setExpandedMenus(newExpanded)
-    }
-    const menuSectionClass = ` fixed z-20 ${
+    const menuSectionClass = `fixed z-20 ${
         menuExpanded ? 'w-screen' : 'w-0'
-    } lg:w-60 lg:relative overflow-y-auto h-full transition-width lg:transition-none`
+    } lg:w-full lg:relative overflow-y-auto h-full transition-width lg:transition-none bg-gray-800`
 
     const updateContentId = (id: string) => {
         setContentId(id)
@@ -83,30 +78,23 @@ export const App = (): JSX.Element => {
             <AppBody defaultCompact={!params.id}>
                 <section className={menuSectionClass}>
                     <Menu>
-                        <MenuLayout
-                            icon={Filter}
-                            toggleExpand={toggleExpand}
-                            name="Filter"
-                            isActive={expandedMenus.indexOf('Filter') !== -1}
-                        >
-                            <FilterMenu
+                        <MenuLayout icon={Book} name="Sources">
+                            <SourcesMenu
                                 sources={sources}
                                 sourcesStatus={sourcesStatus}
                                 filters={filters}
                                 setFilters={setFilters}
                             />
                         </MenuLayout>
-                        <MenuLayout
-                            icon={Search}
-                            toggleExpand={toggleExpand}
-                            name="Search"
-                            isActive={expandedMenus.indexOf('Search') !== -1}
-                        >
+                        <MenuLayout icon={Calendar} name="Date">
+                            <DateMenu filters={filters} setFilters={setFilters} />
+                        </MenuLayout>
+                        <MenuLayout icon={Search} name="Search">
                             <SearchMenu filters={filters} setFilters={setFilters} />
                         </MenuLayout>
                     </Menu>
                 </section>
-                <section className="overflow-y-hidden">
+                <section className="overflow-y-hidden bg-gray-800">
                     <ArticlesList
                         status={articlesStatus}
                         articles={articles}

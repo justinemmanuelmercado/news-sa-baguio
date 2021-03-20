@@ -61,7 +61,7 @@ function Content({ content, status }: { content: ContentType; status: string }):
                 {status === 'loading' && <Blank isLoading={true} />}
                 {status === 'idle' && <Blank isLoading={false} />}
                 {status === 'success' && (
-                    <article className="w-full p-0 lg:p-4 bg-gray-100">
+                    <article className="w-full p-0 lg:p-4">
                         <div>
                             {content.image ? (
                                 <div className="rounded-sm h-96 overflow-hidden ">
