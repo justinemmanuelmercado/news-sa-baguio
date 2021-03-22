@@ -34,14 +34,14 @@ const ArticleItem = ({
         <button
             aria-label={`Read article: ${article.title}`}
             onClick={() => handleArticleClick(article.id)}
-            className={`focus:outline-black bg-gray-50 odd:bg-gray-100 flex flex-row rounded-sm cursor-pointer text-left max-h-40 min-h-32 hover:text-green-100 border border-gray-400 w-full ${
-                selected ? 'shadow-inner' : 'shadow-lg'
+            className={`focus:outline-black bg-gray-700  hover:text-green-100 text-gray-50 flex flex-row rounded-sm cursor-pointer text-left w-full ${
+                selected ? 'shadow-inner' : ''
             }`}
         >
             {article.image ? (
-                <div className="w-1/4 h-40 min-h-32 p-1 overflow-hidden">
+                <div className="w-1/4 p-1 overflow-hidden">
                     <img
-                        className={`object-cover w-full h-full ${imageDidLoad ? '' : 'hidden'}`}
+                        className={`object-cover h-full max-h-60 ${imageDidLoad ? '' : 'hidden'}`}
                         src={article.image}
                         onLoad={() => handleOnload()}
                         alt={article.description}
@@ -54,21 +54,17 @@ const ArticleItem = ({
                 ''
             )}
             <div
-                className={`h-40 min-h-32 py-1 flex flex-col justify-between ${
+                className={`py-4 px-2 flex flex-col justify-between ${
                     article.image ? 'w-3/4' : 'w-full'
                 } ${selected ? 'border-r-4 border-green-100' : ''}`}
             >
                 <div className="px-4">
-                    <div className="space-x-4">
-                        <span className="font-light text-gray-800">{createdAtString}</span>
-                        {article.author ? (
-                            <span className="text-black">by {article.author}</span>
-                        ) : (
-                            ''
-                        )}
+                    <div className="space-x-4 text-gray-100">
+                        <span className="font-light">{createdAtString}</span>
+                        {article.author ? <span>by {article.author}</span> : ''}
                     </div>
                     <h1
-                        className="text-xl font-bold text-black"
+                        className="text-xl py-4 font-bold"
                         dangerouslySetInnerHTML={{ __html: title }}
                     />
                 </div>
