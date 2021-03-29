@@ -22,7 +22,7 @@ export const AppBody = ({
     return (
         <CompactContentContext.Provider value={{ compactContent, setCompactContent }}>
             <div
-                className={`w-screen grid gap-0 transition-grid-cols h-full overflow-auto ${currentGridSetup}`}
+                className={`m-auto grid gap-0 transition-grid-cols h-full overflow-auto ${currentGridSetup}`}
             >
                 {children}
             </div>

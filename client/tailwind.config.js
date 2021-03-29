@@ -10,8 +10,8 @@ module.exports = {
             app: 'max-content 1fr',
         },
         gridTemplateColumns: {
-            'main-list': '18rem 1.2fr 0.8fr',
-            'main-content': '18rem 0.8fr 1.2fr',
+            'main-list': '18rem minmax(48rem, 64rem) minmax(24rem, 48rem)',
+            'main-content': '18rem minmax(24rem, 48rem) minmax(48rem, 64rem)',
             'mobile-main-content': '0vw 100vw',
             'mobile-main-list': '100vw 0vw',
         },

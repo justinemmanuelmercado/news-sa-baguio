@@ -10,7 +10,7 @@ const BlankBar = () => <div className="h-4 bg-gray-200 rounded"></div>
 function Blank({ isLoading }: { isLoading: boolean }): JSX.Element {
     return (
         <article className={`${isLoading ? 'animate-pulse' : ''} `}>
-            <div className="h-96 bg-gray-200"></div>
+            <div className={`${isLoading ? 'h-96' : 'h-36'} bg-gray-200`}></div>
             <h1 className="font-black text-black text-4xl p-8">
                 {isLoading ? 'Loading...' : 'Select an article to get started'}
             </h1>
@@ -72,9 +72,9 @@ function Content({ content, status }: { content: ContentType; status: string }):
                                     ></img>
                                 </div>
                             ) : (
-                                <div className="h-96 bg-gray-200"></div>
+                                <div className="h-36 bg-gray-200"></div>
                             )}
-                            <div className="py-6 px-6 text-black space-y-4">
+                            <div className="max-w-prose m-auto py-6 px-6 text-black space-y-4">
                                 <div className="pt-6 flex flex-col justify-between space-y-4">
                                     <h1 className="font-black text-black text-4xl">
                                         {content.title}

@@ -73,7 +73,7 @@ export const App = (): JSX.Element => {
         history.push(`/${id}`)
     }
     return (
-        <main className="grid-rows-app h-screen grid">
+        <main className="grid-rows-app bg-gray-800 h-screen grid">
             <Header setMenuExpanded={setMenuExpanded} menuExpanded={menuExpanded} />
             <AppBody defaultCompact={!params.id}>
                 <section className={menuSectionClass}>
@@ -103,8 +103,7 @@ export const App = (): JSX.Element => {
                         contentId={contentId}
                     />
                 </section>
-
-                <section className="overflow-y-scroll h-full">
+                <section className="max-w-screen-md overflow-y-scroll bg-gray-100 h-full">
                     <Content content={content} status={contentStatus} />
                 </section>
             </AppBody>
