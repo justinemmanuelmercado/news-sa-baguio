@@ -8,7 +8,7 @@ function DateInput(
     return (
         <input
             {...props}
-            className="mt-2 p-2 rounded-sm text-base text-gray-700 border border-gray-300 bg-gray-100"
+            className="mt-2 p-2 rounded-sm text-base text-gray-200 border border-gray-800 bg-gray-800"
         />
     )
 }

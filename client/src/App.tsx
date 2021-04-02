@@ -103,7 +103,7 @@ export const App = (): JSX.Element => {
                         contentId={contentId}
                     />
                 </section>
-                <section className="max-w-screen-md overflow-y-scroll bg-gray-100 h-full">
+                <section className="overflow-y-scroll bg-gray-100 h-full">
                     <Content content={content} status={contentStatus} />
                 </section>
             </AppBody>

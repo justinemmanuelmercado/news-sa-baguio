@@ -25,11 +25,12 @@ function SearchMenu({
         <>
             <form
                 onSubmit={handleSearch}
-                className="flex flex-row rounded-sm text-base text-gray-700 bg-gray-50"
+                className="flex flex-row rounded-sm text-base text-gray-50"
             >
                 <input
-                    className="p-2 rounded-l-sm text-base text-black w-4/5 bg-gray-100"
+                    className="p-2 rounded-l-sm text-base w-4/5 bg-gray-800 border border-gray-700"
                     value={searchQuery}
+                    placeholder="Search..."
                     onChange={handleChange}
                     type="text"
                     name="search"

@@ -12,10 +12,12 @@ const ArticleItem = ({
     article,
     handleArticleClick,
     selected,
+    compactContent,
 }: {
     article: Article
     handleArticleClick: HandleArticleClick
     selected: boolean
+    compactContent: boolean
 }): JSX.Element => {
     const [imageDidLoad, setImageDidLoad] = useState<boolean>(false)
     const title = useMemo(() => {
@@ -34,14 +36,16 @@ const ArticleItem = ({
         <button
             aria-label={`Read article: ${article.title}`}
             onClick={() => handleArticleClick(article.id)}
-            className={`focus:outline-black bg-gray-700  hover:text-green-100 text-gray-50 flex flex-row rounded-sm cursor-pointer text-left w-full ${
+            className={`${
+                selected ? 'border-r-4 border-green-100' : ''
+            } focus:outline-black bg-gray-700 hover:text-green-100 text-gray-50 flex flex-row rounded-sm cursor-pointer text-left w-full ${
                 selected ? 'shadow-inner' : ''
             }`}
         >
             {article.image ? (
-                <div className="w-1/4 p-1 overflow-hidden">
+                <div className="w-1/4 overflow-hidden block h-48 my-auto">
                     <img
-                        className={`object-cover h-full max-h-60 ${imageDidLoad ? '' : 'hidden'}`}
+                        className={`object-cover h-full ${imageDidLoad ? '' : 'hidden'}`}
                         src={article.image}
                         onLoad={() => handleOnload()}
                         alt={article.description}
@@ -54,9 +58,9 @@ const ArticleItem = ({
                 ''
             )}
             <div
-                className={`py-4 px-2 flex flex-col justify-between ${
+                className={`py-4 px-2 flex flex-col justify-between h-full ${
                     article.image ? 'w-3/4' : 'w-full'
-                } ${selected ? 'border-r-4 border-green-100' : ''}`}
+                } `}
             >
                 <div className="px-4">
                     <div className="space-x-4 text-gray-100">
